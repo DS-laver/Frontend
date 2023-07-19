@@ -9,9 +9,9 @@ export default function MyStack() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
-        initialRouteName="My"
+        initialRouteName="MyPage"
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name="My" component={MyPage} />
+        <Stack.Screen name="MyPage" component={MyPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
-import HealthCare from '../pages/HealthCare'
+import HealthCarePage from '../pages/HealthCarePage'
 
 const Stack = createNativeStackNavigator()
 
@@ -9,9 +9,9 @@ export default function HealthStack() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
-        initialRouteName="Health"
+        initialRouteName="HealthCarePage"
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Health" component={HealthCare} />
+        <Stack.Screen name="HealthCarePage" component={HealthCarePage} />
       </Stack.Navigator>
     </NavigationContainer>
   )

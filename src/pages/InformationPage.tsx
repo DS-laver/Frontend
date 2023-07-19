@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export default function HealthCare() {
+export default function InformationPage() {
   return (
     <View>
-      <Text>HealthCare</Text>
+      <Text>Information</Text>
     </View>
   )
 }

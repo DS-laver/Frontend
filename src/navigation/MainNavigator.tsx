@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import InformStack from "./InformStack";
 import CommStack from "./CommStack";
 import HealthStack from "./HealthStack";
-import ProductionStack from "./ProductionStack";
+import HealthDataStack from "./HealthDataStack";
 import MyStack from "./MyStack";
 
 import {ParamListBase, RouteProp} from '@react-navigation/native'
@@ -18,18 +18,23 @@ export default function MainNavigator() {
     const { name } = route
     return {
       headerShown: false, 
+      tabBarStyle: {
+        height: 55,
+        backgroundColor: '#FECCCD',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,},
       tabBarLabel: ({ focused, color, size }: TabBarProps) => {
         switch (name) { 
           case 'inform':
-            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, marginBottom: 3 }}>정보 알리미</Text>
+            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, fontFamily: 'SCDream6', marginBottom: 3 }}>정보 알리미</Text>
           case 'comm':
-            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, marginBottom: 3 }}>소통의 장</Text>
+            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, fontFamily: 'SCDream6', marginBottom: 3 }}>소통의 장</Text>
           case 'health':
-            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, marginBottom: 3 }}>건강 관리</Text>
-          case 'production':
-            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, marginBottom: 3 }}>생산</Text>
+            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, fontFamily: 'SCDream6', marginBottom: 3 }}>건강 관리</Text>
+          case 'healthData':
+            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, fontFamily: 'SCDream6', marginBottom: 3 }}>건강 보기</Text>
           case 'my':
-            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, marginBottom: 3 }}>마이 페이지</Text>        }
+            return <Text style={{ color: focused ? 'purple' : color, fontSize: 10, fontFamily: 'SCDream6', marginBottom: 3 }}>마이 페이지</Text>        }
       },
       tabBarIcon: ({ focused, color, size }: TabBarProps) => {
         switch (name) {
@@ -42,7 +47,7 @@ export default function MainNavigator() {
           case 'health':
             return <Image
               source={focused ? require("../assets/icons/health-selected.png") : require("../assets/icons/health-default.png")} />
-          case 'production':
+          case 'healthData':
             return <Image
               source={focused ? require("../assets/icons/production-selected.png") : require("../assets/icons/production-default.png")} />
           case 'my':
@@ -58,7 +63,7 @@ export default function MainNavigator() {
       <Tab.Screen name="inform" component={InformStack} />
       <Tab.Screen name="comm" component={CommStack} />
       <Tab.Screen name="health" component={HealthStack} />
-      <Tab.Screen name="production" component={ProductionStack} />
+      <Tab.Screen name="HealthData" component={HealthDataStack} />
       <Tab.Screen name="my" component={MyStack} />
     </Tab.Navigator>
   )
