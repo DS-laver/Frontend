@@ -1,20 +1,22 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
-import HealthSurvey from './HealthCare/HealthSurvey'
+import HealthSurveyInput from './HealthCare/HealthSurveyInput'
 import AnalogClock from './HealthCare/AnalogClock'
+import EmptyPill from '../components/EmptyPill'
+import FullPill from '../components/FullPill'
 
 export default function HealthCarePage({navigation}) {
 
-  const continuous = 0;
+  const [continuous, setContinous] = useState(0);
 
   var today = new Date();
   var todayMonth = today.getMonth()+1;
   var todyaDate = today.getDate();
 
   var medicineAllEat = false;
-  var timing = '오전';
-  var mustEat = '타이레놀';
+  const [timing, setTiming] = useState('오전');
+  const [mustEat, setMustEat] = useState('타이레놀');
 
   var todaySurveyDone = false;
 
@@ -55,9 +57,12 @@ export default function HealthCarePage({navigation}) {
         </Text>
       </View>
 
+      <EmptyPill />
+      <FullPill />
+
       <View style={styles.healthSurveyContainer}>
         <TouchableOpacity
-          onPress={() =>{navigation.navigate('HealthSurvey')}}
+          onPress={() =>{navigation.navigate('HealthSurveyInput')}}
         >
           <Text style={styles.healthSurveyButton}>
             {todaySurveyDone ? '오늘의 건강 설문보기' : '오늘의 건강 설문하기'}
@@ -100,11 +105,13 @@ const styles = StyleSheet.create({
   continuousInfo: {
     fontSize: 12,
     fontFamily: 'SCDream5',
+    color: '#000000'
     
   },
   continuousText: {
     fontSize: 15,
     fontFamily: 'SCDream6',
+    color: '#000000'
   },
 
   calendarContainer: {
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
     height: 70,
   },
   calendarText: {
-    fontSize: 15
+    fontSize: 15,
   },
 
   timeContainer: {
@@ -139,10 +146,12 @@ const styles = StyleSheet.create({
   todayString: {
     fontSize: 20,
     fontFamily: 'SCDream6',
+    color: '#000000'
   },
   todayDate: {
     fontSize: 30,
     fontFamily: 'SCDream6',
+    color: '#000000'
   },
 
   medicineInfoContainer: {
@@ -161,6 +170,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 15,
     fontFamily: 'SCDream5',
+    color: '#000000'
   },
 
   healthSurveyContainer: {
@@ -181,5 +191,6 @@ const styles = StyleSheet.create({
   healthSurveyButton: {
     alignContent: "center",
     fontFamily: 'SCDream6',
+    color: '#000000'
   }
 })
