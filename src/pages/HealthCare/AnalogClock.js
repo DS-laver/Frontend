@@ -12,7 +12,7 @@ import {
 export default class AnalogClock extends Component {
   render() {
     let screenWidth = Dimensions.get("window").width
-    let clockWidth = (screenWidth - 180)
+    let clockWidth = (screenWidth - 170)
     let clockHeight = clockWidth
     let hourHandleWidth = 6
     let minitesHandleWidth = 4
@@ -60,6 +60,7 @@ export default class AnalogClock extends Component {
 
 const styles = StyleSheet.create({
   clockContainter: {
+    margin: 40,
     borderWidth: 2,
     borderColor: "#000",
     position: "relative"
