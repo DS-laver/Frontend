@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 // import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
 // import { RadioButton } from 'react-native-paper';/
 
-const HealthSurvey= () => {
+const HealthSurvey= ({navigation}) => {
 
   var settingDate = new Date();
   var settingDateYear = settingDate.getFullYear();
