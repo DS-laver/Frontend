@@ -1,7 +1,6 @@
 import { Text, StyleSheet, View, ScrollView, TextInput } from 'react-native';
 import React, {useState} from 'react';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
-// import { RadioButton } from 'react-native-paper';/
 
 const HealthSurveyInput= ({navigation}) => {
 
