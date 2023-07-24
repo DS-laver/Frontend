@@ -11,7 +11,7 @@ export default function HealthCarePage({navigation}) {
   const [continuous, setContinous] = useState(0);
 
   var today = new Date();
-  var todayMonth = today.getMonth()+1;
+  var todayMonth = today.getMonth()+1 < 10 ? `0${today.getMonth()+1}` : today.getMonth()+1;
   var todyaDate = today.getDate();
 
   var medicineAllEat = false;
@@ -23,7 +23,10 @@ export default function HealthCarePage({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <TouchableOpacity style={styles.calendarContainer}>
+        <TouchableOpacity 
+          style={styles.calendarButtonContainer}
+          onPress={() =>{navigation.navigate('CalendarPage')}}
+        >
           <Image
             style={styles.calendarImage}
             source={require('../assets/HealthCareIcon/CalendarIcon.png')}
@@ -57,8 +60,8 @@ export default function HealthCarePage({navigation}) {
         </Text>
       </View>
 
-      <EmptyPill />
-      <FullPill />
+      <EmptyPill navigation={navigation}/>
+      <FullPill navigation={navigation} />
 
       <View style={styles.healthSurveyContainer}>
         <TouchableOpacity
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#000000'
   },
 
-  calendarContainer: {
+  calendarButtonContainer: {
     marginLeft: 30,
     // alignItems: "center",
     justifyContent: "center"

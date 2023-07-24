@@ -1,10 +1,13 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
+import AddMoreMedicine from './AddMoreMedicine'
 
-export default function EmptyPill() {
+export default function EmptyPill({navigation}) {
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => { <AddMoreMedicine />}}
+        >
             <View style={styles.eatMedicineContainer}>
                 <Image
                     style={styles.pillImage}

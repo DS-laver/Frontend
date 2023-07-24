@@ -7,14 +7,14 @@ const HealthSurveyInput= ({navigation}) => {
 
   var settingDate = new Date();
   var settingDateYear = settingDate.getFullYear();
-  var settingDateMonth = settingDate.getMonth()+1;
+  var settingDateMonth = settingDate.getMonth()+1 < 10 ? `0${settingDate.getMonth()+1}` : settingDate.getMonth()+1;
   var settingDateDate = settingDate.getDate();
 
   return (
     <View style={styles.container}>
       <View style={styles.settingDateContainer}>
         <Text style={styles.settingDateText}>
-          {settingDateYear}.0{settingDateMonth}.{settingDateDate} 기록
+          {settingDateYear}.{settingDateMonth}.{settingDateDate} 기록
         </Text>
       </View>
 
