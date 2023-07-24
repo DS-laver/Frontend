@@ -29,7 +29,7 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
         >
           <Image
             style={styles.calendarImage}
-            source={require('../assets/HealthCareIcon/CalendarIcon.png')}
+            source={require('../../assets/HealthCareIcon/CalendarIcon.png')}
           />
           {/* <Text style={styles.calendarText}>달력보기</Text> */}
         </TouchableOpacity>
@@ -50,7 +50,7 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
       <View style={styles.medicineInfoContainer}>
         <Image
           style={styles.infoIcon}
-          source={require('../assets/HealthCareIcon/Warning.png')}
+          source={require('../../assets/HealthCareIcon/Warning.png')}
         />
         <Text style={styles.infoText}>
           { medicineAllEat
