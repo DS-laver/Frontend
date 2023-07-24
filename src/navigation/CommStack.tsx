@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
-import CommunicationPage from '../pages/CommunicationPage'
-import TalkPage from '../pages/TalkPage'
-import SettingPage from '../pages/SettingPage'
-import WritingPage from '../pages/WritingPage'
-import DetailBoardPage from '../pages/DetailBoardPage'
+import CommunicationPage from '../pages/communication/CommunicationPage'
+import TalkPage from '../pages/communication/TalkPage'
+import SettingPage from '../pages/communication/SettingPage'
+import WritingPage from '../pages/communication/WritingPage'
+import DetailBoardPage from '../pages/communication/DetailBoardPage'
 
 const Stack = createNativeStackNavigator()
 

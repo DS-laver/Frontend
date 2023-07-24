@@ -22,12 +22,12 @@ export default function WritingPage({navigation}: {navigation: any}) {
           placeholder="내용을 입력해주세요." />
       </View>
       <View style={styles.btnView}>
-        <TouchableOpacity onPress={() => {navigation.navigate('Communication')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('CommunicationPage')}}>
           <View style={styles.cancelBtn}>
             <Text style={styles.cancelText}>취소</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('Communication')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('CommunicationPage')}}>
           <View style={styles.sendBtn}>
             <Text style={styles.sendText}>확인</Text>
           </View>

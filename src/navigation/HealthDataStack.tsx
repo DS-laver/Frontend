@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
-import HealthDataPage from '../pages/HealthDataPage'
+import HealthDataPage from '../pages/healthData/HealthDataPage'
 
 const Stack = createNativeStackNavigator()
 
