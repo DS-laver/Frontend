@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React, {useState} from 'react';
 
-import HealthSurveyInput from './HealthCare/HealthSurveyInput'
-import AnalogClock from './HealthCare/AnalogClock'
-import EmptyPill from '../components/EmptyPill'
-import FullPill from '../components/FullPill'
+import HealthSurveyInput from './HealthSurveyInput';
+import AnalogClock from './AnalogClock';
+import EmptyPill from '../../components/EmptyPill';
+import FullPill from '../../components/FullPill';
 
-export default function HealthCarePage({navigation}) {
+export default function HealthCarePage({navigation}: {navigation: any}) {
 
   const [continuous, setContinous] = useState(0);
 
@@ -29,7 +29,7 @@ export default function HealthCarePage({navigation}) {
         >
           <Image
             style={styles.calendarImage}
-            source={require('../assets/HealthCareIcon/CalendarIcon.png')}
+            source={require('../../assets/HealthCareIcon/CalendarIcon.png')}
           />
           {/* <Text style={styles.calendarText}>달력보기</Text> */}
         </TouchableOpacity>
@@ -50,7 +50,7 @@ export default function HealthCarePage({navigation}) {
       <View style={styles.medicineInfoContainer}>
         <Image
           style={styles.infoIcon}
-          source={require('../assets/HealthCareIcon/Warning.png')}
+          source={require('../../assets/HealthCareIcon/Warning.png')}
         />
         <Text style={styles.infoText}>
           { medicineAllEat

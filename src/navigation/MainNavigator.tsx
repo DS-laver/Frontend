@@ -49,7 +49,7 @@ export default function MainNavigator() {
               source={focused ? require("../assets/icons/health-selected.png") : require("../assets/icons/health-default.png")} />
           case 'healthData':
             return <Image
-              source={focused ? require("../assets/icons/production-selected.png") : require("../assets/icons/production-default.png")} />
+              source={focused ? require("../assets/icons/healthData-selected.png") : require("../assets/icons/healthData-default.png")} />
           case 'my':
             return <Image
               source={focused ? require("../assets/icons/my-selected.png") : require("../assets/icons/my-default.png")} />
@@ -63,7 +63,7 @@ export default function MainNavigator() {
       <Tab.Screen name="inform" component={InformStack} />
       <Tab.Screen name="comm" component={CommStack} />
       <Tab.Screen name="health" component={HealthStack} />
-      <Tab.Screen name="HealthData" component={HealthDataStack} />
+      <Tab.Screen name="healthData" component={HealthDataStack} />
       <Tab.Screen name="my" component={MyStack} />
     </Tab.Navigator>
   )

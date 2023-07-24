@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
-import BoardCard from '../components/BoardCard';
+import BoardCard from '../../components/BoardCard';
 
 // @ts-ignore
 export default function CommunicationPage({navigation}) {
@@ -15,13 +15,13 @@ export default function CommunicationPage({navigation}) {
           <TouchableOpacity
             style={styles.settingIcon}
             onPress={() => {navigation.navigate('SettingPage')}}>
-            <Image source={require('../assets/icons/setting.png')} />
+            <Image source={require('../../assets/icons/setting.png')} />
           </TouchableOpacity>
           <Text style={styles.titleText}>자유 게시판</Text>
           <TouchableOpacity
             style={styles.speechBubbleIcon}
             onPress={() => {navigation.navigate('TalkPage')}} >
-            <Image source={require('../assets/icons/speechBubble.png')} />
+            <Image source={require('../../assets/icons/speechBubble.png')} />
           </TouchableOpacity>
         </View>
         {/* search */}
@@ -32,7 +32,7 @@ export default function CommunicationPage({navigation}) {
             placeholder="키워드를 입력해주세요."
           />
           <TouchableOpacity style={styles.magnifierIcon}>
-            <Image source={require('../assets/icons/magnifier.png')} />
+            <Image source={require('../../assets/icons/magnifier.png')} />
           </TouchableOpacity>
         </View>
           {/* 게시글이 하나도 없을 때랑 있을 때 조건 필요 */}
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     width: '80%',
     padding: 10,
+    fontFamily: 'SCDream4',
   },
   magnifierIcon: {
     justifyContent: 'center',

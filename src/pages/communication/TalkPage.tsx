@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React from 'react'
-import ChatCard from '../components/ChatCard'
+import ChatCard from '../../components/ChatCard'
 
 export default function TalkPage({navigation}: {navigation: any}) {
 
@@ -9,8 +9,8 @@ export default function TalkPage({navigation}: {navigation: any}) {
       <View style={styles.talkTop}>
         <TouchableOpacity
           style={styles.backArrowIcon}
-          onPress={() => {navigation.navigate('Communication')}} >
-          <Image source={require('../assets/icons/arrow.png')} />
+          onPress={() => {navigation.navigate('CommunicationPage')}} >
+          <Image source={require('../../assets/icons/arrow.png')} />
         </TouchableOpacity>
         <View style={styles.chatingView}>
           <Text style={styles.chatingText}>채팅</Text>

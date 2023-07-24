@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
-import InformationPage from '../pages/InformationPage'
+import InformationPage from '../pages/information/InformationPage'
 
 const Stack = createNativeStackNavigator()
 
