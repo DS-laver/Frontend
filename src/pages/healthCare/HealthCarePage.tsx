@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React, {useState} from 'react';
 
-import HealthSurveyInput from './HealthCare/HealthSurveyInput'
-import AnalogClock from './HealthCare/AnalogClock'
-import EmptyPill from '../components/EmptyPill'
-import FullPill from '../components/FullPill'
+import HealthSurveyInput from './HealthSurveyInput';
+import AnalogClock from './AnalogClock';
+import EmptyPill from '../../components/EmptyPill';
+import FullPill from '../../components/FullPill';
 
-export default function HealthCarePage({navigation}) {
+export default function HealthCarePage({navigation}: {navigation: any}) {
 
   const [continuous, setContinous] = useState(0);
 
