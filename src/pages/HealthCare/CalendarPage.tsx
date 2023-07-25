@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Calendar } from "react-native-calendars";
 import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native";
 
@@ -11,6 +11,10 @@ function CalendarView() {
   const date = today.getDate();
   const todayString = `${year}-${month < 10 ? `0${month}` : month}-${date < 10 ? `0${date}` : date}`.toString();
   
+  const [selected, setSelected] = useState('');
+
+  const [isSelectToday, setIsSelectToday] = useState(true);
+  const [todaySurveyDone, setTodaySurveyDone] = useState(true);
 
   return (
     <View style={styles.calendarContainer}>
@@ -26,18 +30,49 @@ function CalendarView() {
           />
           {/* <Text style={styles.calendarText}>달력보기</Text> */}
         </TouchableOpacity>
-        <Text style={styles.calendarTitle}>복용 달력</Text>
+      </View>
+      <View style={styles.calendarTitleContainer}>
+        <Text style={styles.calendarTitle}>월별</Text>
       </View>
       <Calendar 
         style={styles.calendar} 
-        markedDates={{todayString: {marked: true}}}
+        // markedDates={{todayString: {marked: true}}}
         theme={{
-          selectedDayBackgroundColor: '#009688',
-          arrowColor: '#009688',
-          dotColor: '#009688',
-          todayTextColor: '#009688',
+          selectedDayBackgroundColor: '#FB3F4A',
+          arrowColor: '#FB3F4A',
+          dotColor: '#FB3F4A',
+          todayTextColor: '#FB3F4A',
+        }}
+        onDayPress={day => {
+          setSelected(day.dateString);
+        }}
+        markedDates={{
+          [selected]: 
+            {selected: true, 
+            disableTouchEvent: true, }
         }}
       />
+
+      <View style={styles.monthButtonsContainer}>
+        <TouchableOpacity>
+          <Text style={styles.monthButton}>
+            복용한 약 확인
+          </Text>
+        </TouchableOpacity>
+        {isSelectToday
+          ? <TouchableOpacity>
+            {todaySurveyDone 
+            ? <Text style={styles.monthButton}>오늘의 건강 설문보기</Text> 
+            : <Text style={styles.monthButton}>오늘의 건강 설문하기</Text>}
+            </TouchableOpacity> 
+          : <TouchableOpacity>
+            <Text style={styles.monthButton}>
+              지난 건강 설문 확인
+            </Text>
+          </TouchableOpacity>
+        }
+      </View>
+
     </View>
   );
 }
@@ -61,24 +96,54 @@ const styles = StyleSheet.create({
   calendarImage: {
     // width: 60,
     // height: 60,
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
   },
   calendarText: {
     fontSize: 15,
   },
 
+  calendarTitleContainer: {
+    // marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center"
+  },
   calendarTitle:{
     alignItems: 'center',
-    fontSize: 30,
-    fontFamily: 'SCDream5',
+    fontSize: 40,
+    fontFamily: 'SCDream6',
     color: '#000000'
   },
+  
   calendar: {
     borderRadius: 30,
     margin: 20,
+    marginTop: 30,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+    padding: 15,
+  },
+
+  
+  monthButtonsContainer: {
+    // marginBottom: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: "row",
+    // flex: 1,
+  },
+  monthButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: "center",
+    textAlign: 'center',
+    margin: 10,
+    width: 165,
+    fontFamily: 'SCDream6',
+    color: '#000000',
+    backgroundColor: '#FECCCD',
+    borderRadius: 20,
+    padding: 15,
   }
 });
 
