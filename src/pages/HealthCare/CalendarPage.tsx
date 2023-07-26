@@ -1,20 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Calendar } from "react-native-calendars";
 import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native";
 
-function CalendarView() {
-
-  // 현재 날짜 표시
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const date = today.getDate();
-  const todayString = `${year}-${month < 10 ? `0${month}` : month}-${date < 10 ? `0${date}` : date}`.toString();
+function CalendarView({navigation}: {navigation: any}) {
   
   const [selected, setSelected] = useState('');
 
-  const [isSelectToday, setIsSelectToday] = useState(true);
-  const [todaySurveyDone, setTodaySurveyDone] = useState(true);
+  const [isSelectToday, setIsSelectToday] = useState(false);
+  const [todaySurveyDone, setTodaySurveyDone] = useState(false);
+  
+  const checkIsToday = (selectedDate: string) => {
+    const currentDate = new Date().toISOString().split("T")[0];
+    setIsSelectToday(selectedDate === currentDate);
+  };
+
+  
+  useEffect(() => {
+    console.log(isSelectToday);
+  }, [isSelectToday]);
 
   return (
     <View style={styles.calendarContainer}>
@@ -22,7 +25,7 @@ function CalendarView() {
       <View style={styles.topContainer}>
         <TouchableOpacity 
           style={styles.calendarButtonContainer}
-          // onPress={() =>{navigation.navigate('CalendarPage')}}
+          onPress={() =>{navigation.navigate('HealthCarePage')}}
         >
           <Image
             style={styles.calendarImage}
@@ -45,6 +48,7 @@ function CalendarView() {
         }}
         onDayPress={day => {
           setSelected(day.dateString);
+          checkIsToday(day.dateString);
         }}
         markedDates={{
           [selected]: 
@@ -54,25 +58,32 @@ function CalendarView() {
       />
 
       <View style={styles.monthButtonsContainer}>
+
         <TouchableOpacity>
           <Text style={styles.monthButton}>
             복용한 약 확인
           </Text>
         </TouchableOpacity>
-        {isSelectToday
-          ? <TouchableOpacity>
-            {todaySurveyDone 
-            ? <Text style={styles.monthButton}>오늘의 건강 설문보기</Text> 
-            : <Text style={styles.monthButton}>오늘의 건강 설문하기</Text>}
-            </TouchableOpacity> 
-          : <TouchableOpacity>
+
+        {isSelectToday ? (
+          todaySurveyDone ? (
+            <TouchableOpacity>
+              <Text style={styles.monthButton}>오늘의 건강 설문보기</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity>
+              <Text style={styles.monthButton}>오늘의 건강 설문하기</Text>
+            </TouchableOpacity>
+          )
+        ) : (
+          <TouchableOpacity>
             <Text style={styles.monthButton}>
               지난 건강 설문 확인
             </Text>
           </TouchableOpacity>
-        }
-      </View>
+        )}
 
+      </View>
     </View>
   );
 }
@@ -94,10 +105,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   calendarImage: {
-    // width: 60,
-    // height: 60,
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
   },
   calendarText: {
     fontSize: 15,
@@ -109,6 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   calendarTitle:{
+    marginTop: -20,
     alignItems: 'center',
     fontSize: 40,
     fontFamily: 'SCDream6',
@@ -118,7 +128,7 @@ const styles = StyleSheet.create({
   calendar: {
     borderRadius: 30,
     margin: 20,
-    marginTop: 30,
+    marginTop: 40,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
     padding: 15,
@@ -127,6 +137,7 @@ const styles = StyleSheet.create({
   
   monthButtonsContainer: {
     // marginBottom: 30,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: "row",
@@ -143,7 +154,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     backgroundColor: '#FECCCD',
     borderRadius: 20,
-    padding: 15,
+    padding: 8,
   }
 });
 

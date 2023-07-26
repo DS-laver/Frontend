@@ -16,9 +16,9 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
 
   var medicineAllEat = false;
   const [timing, setTiming] = useState('오전');
-  const [mustEat, setMustEat] = useState('타이레놀');
+  const [mustEat, setMustEat] = useState(['타이레놀', '비타민C']);
 
-  var todaySurveyDone = false;
+  const [todaySurveyDone, setTodaySurveyDone] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -60,8 +60,8 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
         </Text>
       </View>
 
-      <EmptyPill navigation={navigation}/>
-      <FullPill navigation={navigation} />
+      {/* <EmptyPill navigation={navigation}/>
+      <FullPill navigation={navigation} /> */}
 
       <View style={styles.healthSurveyContainer}>
         <TouchableOpacity
@@ -79,7 +79,7 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     alignSelf: "stretch",
     alignItems: "center",
     justifyContent: "center",
@@ -90,14 +90,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 60,
+  },
+  
+  calendarButtonContainer: {
+    // marginLeft: 0,
+    justifyContent: "center"
+  },
+  calendarImage: {
+    width: 70,
+    height: 70,
+  },
+  calendarText: {
+    fontSize: 15,
   },
 
   continuousContainer: {
-    marginLeft: 120,
-    marginRight: 20,
-    paddingTop: 13,
-    paddingBottom: 13,
+    height: 55,
+    marginLeft: 160,
+    // marginRight: 0,
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: "#E8E8E8",
@@ -106,30 +118,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   continuousInfo: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'SCDream5',
     color: '#000000'
     
   },
   continuousText: {
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: 'SCDream6',
     color: '#000000'
-  },
-
-  calendarButtonContainer: {
-    marginLeft: 30,
-    // alignItems: "center",
-    justifyContent: "center"
-  },
-  calendarImage: {
-    // width: 60,
-    // height: 60,
-    width: 70,
-    height: 70,
-  },
-  calendarText: {
-    fontSize: 15,
   },
 
   timeContainer: {
@@ -141,18 +138,17 @@ const styles = StyleSheet.create({
   }, 
   todayDateContainer: {
     marginBottom: 20,
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row"
   },
   todayString: {
     fontSize: 20,
-    fontFamily: 'SCDream6',
+    fontFamily: 'SCDream5',
     color: '#000000'
   },
   todayDate: {
-    fontSize: 30,
+    fontSize: 34,
     fontFamily: 'SCDream6',
     color: '#000000'
   },
@@ -166,12 +162,12 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   }, 
   infoIcon: {
-    width: 15,
-    height: 15,
+    width: 18,
+    height: 18,
     marginRight: 10,
   },
   infoText: {
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: 'SCDream5',
     color: '#000000'
   },
@@ -180,8 +176,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 30,
     // marginLeft: '27.5%',
-    paddingTop: 13,
-    paddingBottom: 13,
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingLeft: 20,
     paddingRight: 20,
     width: '45%',
