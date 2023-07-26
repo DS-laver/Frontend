@@ -6,7 +6,7 @@ export default function EmptyPill({navigation}: {navigation: any}) {
 
     return (
         <TouchableOpacity
-            onPress={() => { <AddEatMedicine />}}
+            onPress={() =>{navigation.navigate('AddEatMedicine')}}
         >
             <View style={styles.eatMedicineContainer}>
                 <Image

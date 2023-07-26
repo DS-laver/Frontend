@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-export default function FullPill({navigation}) {
+export default function FullPill({navigation}: {navigation: any}) {
 
     return (
         <TouchableOpacity>

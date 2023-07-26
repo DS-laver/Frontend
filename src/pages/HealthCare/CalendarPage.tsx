@@ -1,32 +1,31 @@
-import React, {useState, useEffect} from "react";
-import { Calendar } from "react-native-calendars";
-import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import React, {useState, useEffect} from 'react';
+import {Calendar} from 'react-native-calendars';
+import {Text, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 
 function CalendarView({navigation}: {navigation: any}) {
-  
   const [selected, setSelected] = useState('');
 
   const [isSelectToday, setIsSelectToday] = useState(false);
   const [todaySurveyDone, setTodaySurveyDone] = useState(false);
-  
+
+  // 현재 날짜를 기준으로 오늘인지 아닌지를 판단하는 함수
   const checkIsToday = (selectedDate: string) => {
-    const currentDate = new Date().toISOString().split("T")[0];
+    const currentDate = new Date().toISOString().split('T')[0];
     setIsSelectToday(selectedDate === currentDate);
   };
 
-  
   useEffect(() => {
     console.log(isSelectToday);
   }, [isSelectToday]);
 
   return (
     <View style={styles.calendarContainer}>
-      
       <View style={styles.topContainer}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.calendarButtonContainer}
-          onPress={() =>{navigation.navigate('HealthCarePage')}}
-        >
+          onPress={() => {
+            navigation.navigate('HealthCarePage');
+          }}>
           <Image
             style={styles.calendarImage}
             source={require('../../assets/HealthCareIcon/CalendarIcon.png')}
@@ -37,8 +36,8 @@ function CalendarView({navigation}: {navigation: any}) {
       <View style={styles.calendarTitleContainer}>
         <Text style={styles.calendarTitle}>월별</Text>
       </View>
-      <Calendar 
-        style={styles.calendar} 
+      <Calendar
+        style={styles.calendar}
         // markedDates={{todayString: {marked: true}}}
         theme={{
           selectedDayBackgroundColor: '#FB3F4A',
@@ -51,18 +50,13 @@ function CalendarView({navigation}: {navigation: any}) {
           checkIsToday(day.dateString);
         }}
         markedDates={{
-          [selected]: 
-            {selected: true, 
-            disableTouchEvent: true, }
+          [selected]: {selected: true, disableTouchEvent: true},
         }}
       />
 
       <View style={styles.monthButtonsContainer}>
-
         <TouchableOpacity>
-          <Text style={styles.monthButton}>
-            복용한 약 확인
-          </Text>
+          <Text style={styles.monthButton}>복용한 약 확인</Text>
         </TouchableOpacity>
 
         {isSelectToday ? (
@@ -77,32 +71,28 @@ function CalendarView({navigation}: {navigation: any}) {
           )
         ) : (
           <TouchableOpacity>
-            <Text style={styles.monthButton}>
-              지난 건강 설문 확인
-            </Text>
+            <Text style={styles.monthButton}>지난 건강 설문 확인</Text>
           </TouchableOpacity>
         )}
-
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  
   calendarContainer: {
     flex: 1,
     backgroundColor: '#FFF3F1',
   },
 
   topContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 30,
   },
   calendarButtonContainer: {
     marginLeft: 30,
     // alignItems: "center",
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   calendarImage: {
     width: 60,
@@ -114,17 +104,17 @@ const styles = StyleSheet.create({
 
   calendarTitleContainer: {
     // marginTop: 20,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  calendarTitle:{
+  calendarTitle: {
     marginTop: -20,
     alignItems: 'center',
     fontSize: 40,
     fontFamily: 'SCDream6',
-    color: '#000000'
+    color: '#000000',
   },
-  
+
   calendar: {
     borderRadius: 30,
     margin: 20,
@@ -134,19 +124,18 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
-  
   monthButtonsContainer: {
     // marginBottom: 30,
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: "row",
+    flexDirection: 'row',
     // flex: 1,
   },
   monthButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    alignContent: "center",
+    alignContent: 'center',
     textAlign: 'center',
     margin: 10,
     width: 165,
@@ -155,7 +144,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FECCCD',
     borderRadius: 20,
     padding: 8,
-  }
+  },
 });
 
 export default CalendarView;

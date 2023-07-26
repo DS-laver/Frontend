@@ -1,12 +1,22 @@
-import { Image, Text, StyleSheet, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import {
+  Image,
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
-import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
+import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 
-const HealthSurveyResult= ({navigation}: {navigation: any}) => {
-
+const HealthSurveyResult = ({navigation}: {navigation: any}) => {
   var settingDate = new Date();
   var settingDateYear = settingDate.getFullYear();
-  var settingDateMonth = settingDate.getMonth()+1 < 10 ? `0${settingDate.getMonth()+1}` : settingDate.getMonth()+1;
+  var settingDateMonth =
+    settingDate.getMonth() + 1 < 10
+      ? `0${settingDate.getMonth() + 1}`
+      : settingDate.getMonth() + 1;
   var settingDateDate = settingDate.getDate();
 
   return (
@@ -14,7 +24,9 @@ const HealthSurveyResult= ({navigation}: {navigation: any}) => {
       <View style={styles.settingDateContainer}>
         <TouchableOpacity
           style={styles.backArrowIcon}
-          onPress={() => {navigation.navigate('HealthCarePage')}} >
+          onPress={() => {
+            navigation.navigate('HealthCarePage');
+          }}>
           <Image source={require('../../assets/icons/arrow.png')} />
         </TouchableOpacity>
         <Text style={styles.settingDateText}>
@@ -23,35 +35,33 @@ const HealthSurveyResult= ({navigation}: {navigation: any}) => {
       </View>
 
       <View style={styles.surveyTitleContainer}>
-        <Text style={styles.surveyTitleText}>
-          오늘의 자가진단 체크리스트
-        </Text>
+        <Text style={styles.surveyTitleText}>오늘의 자가진단 체크리스트</Text>
       </View>
 
       <ScrollView>
         <View>
-            <YesOrNo question={'발열이 있었나요?'}/>
-            <YesOrNo question={'충분한 수면을 취했나요?'}/>
-            <YesOrNo question={'두통이 있었나요?'} />
-            <YesOrNo question={'요통이 있었나요?'} />
-            <YesOrNo question={'복통이 있었나요?'} />
-            <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-            <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-            <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-            <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-            <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
+          <YesOrNo question={'발열이 있었나요?'} />
+          <YesOrNo question={'충분한 수면을 취했나요?'} />
+          <YesOrNo question={'두통이 있었나요?'} />
+          <YesOrNo question={'요통이 있었나요?'} />
+          <YesOrNo question={'복통이 있었나요?'} />
+          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
+          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
+          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
+          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
+          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
         </View>
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 export default HealthSurveyResult;
 
 function YesOrNo({question}: {question: string}) {
   const [checked, setChecked] = useState('예');
 
-  return(
+  return (
     <View style={styles.questionContainer}>
       <Text style={styles.questionTitle}> Q. {question} </Text>
       <View style={styles.radioButtonStyle}>
@@ -60,41 +70,34 @@ function YesOrNo({question}: {question: string}) {
           size={22}
           thickness={2}
           color="#000000"
-          selectedIndex={1}
-        >
+          selectedIndex={1}>
           <RadioButton
             style={{marginLeft: 20, marginTop: 5}}
-            value="first" 
-            status={checked === "first" ? "checked" : "uncheked"} 
-            onPress={() => setChecked("first")}
-          >
+            value="first"
+            status={checked === 'first' ? 'checked' : 'uncheked'}
+            onPress={() => setChecked('first')}>
             <Text style={styles.firstRadioButtonValue}>예</Text>
           </RadioButton>
           <RadioButton
             style={{marginLeft: 50, marginTop: 5}}
-            value="second" 
-            status={checked === "first" ? "checked" : "uncheked"} 
-            onPress={() => setChecked("second")}
-          >
+            value="second"
+            status={checked === 'first' ? 'checked' : 'uncheked'}
+            onPress={() => setChecked('second')}>
             <Text style={styles.secondRadioButtonValue}>아니오</Text>
           </RadioButton>
         </RadioGroup>
       </View>
     </View>
-  )
+  );
 }
 
 function ExplainQuestion({question}) {
-
-  return(
+  return (
     <View style={styles.questionContainer}>
       <Text style={styles.questionTitle}> Q. {question} </Text>
-      <TextInput
-        returnKeyType='done'
-        style={styles.textInputStyle}
-      />
+      <TextInput returnKeyType="done" style={styles.textInputStyle} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -104,17 +107,17 @@ const styles = StyleSheet.create({
   backArrowIcon: {
     alignSelf: 'center',
   },
-  settingDateContainer:{
+  settingDateContainer: {
     marginTop: 45,
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
   settingDateText: {
     fontSize: 40,
     marginLeft: 10,
     marginRight: 13,
     fontFamily: 'SCDream6',
-    color: "#000000",
+    color: '#000000',
   },
 
   surveyTitleContainer: {
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignContent: 'center',
     justifyContent: 'center',
-    backgroundColor: "#FEC0C1",
+    backgroundColor: '#FEC0C1',
     borderRadius: 20,
   },
   surveyTitleText: {
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: 20,
     fontFamily: 'SCDream5',
-    color: "#000000",
+    color: '#000000',
   },
 
   radioButtonStyle: {
@@ -150,26 +153,26 @@ const styles = StyleSheet.create({
   questionTitle: {
     fontSize: 20,
     fontFamily: 'SCDream5',
-    color: "#000000",
+    color: '#000000',
   },
-  firstRadioButtonValue:{
+  firstRadioButtonValue: {
     fontSize: 15,
     fontFamily: 'SCDream5',
-    color: "#000000",
+    color: '#000000',
   },
-  secondRadioButtonValue:{
+  secondRadioButtonValue: {
     fontSize: 15,
     fontFamily: 'SCDream5',
-    color: "#000000",
+    color: '#000000',
   },
 
   textInputStyle: {
-    height: 40, 
+    height: 40,
     marginTop: 10,
     // marginLeft: 10,
     // marginRight: 10,
     borderColor: '#DEDEDE',
     borderRadius: 10,
     borderWidth: 1,
-  }
-})
+  },
+});
