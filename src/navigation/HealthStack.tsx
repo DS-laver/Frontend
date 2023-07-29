@@ -7,6 +7,7 @@ import HealthSurveyInput from '../pages/healthCare/HealthSurveyInput'
 import CalendarPage from '../pages/healthCare/CalendarPage'
 import HealthSurveyResult from '../pages/healthCare/HealthSurveyResult'
 import AddEatMedicine from '../pages/healthCare/AddEatMedicine'
+import PastMedicineList from '../pages/healthCare/PastMedicineList'
 
 const Stack = createNativeStackNavigator()
 
@@ -21,6 +22,7 @@ export default function HealthStack() {
         <Stack.Screen name="HealthSurveyInput" component={HealthSurveyInput} />
         <Stack.Screen name="HealthSurveyResult" component={HealthSurveyResult} />
         <Stack.Screen name="AddEatMedicine" component={AddEatMedicine} />
+        <Stack.Screen name="PastMedicineList" component={PastMedicineList} />
       </Stack.Navigator>
     </NavigationContainer>
   )

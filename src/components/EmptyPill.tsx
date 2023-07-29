@@ -1,6 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
-import AddEatMedicine from '../pages/healthCare/AddEatMedicine'
 
 export default function EmptyPill({navigation}: {navigation: any}) {
 

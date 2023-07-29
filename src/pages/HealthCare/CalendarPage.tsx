@@ -28,7 +28,7 @@ function CalendarView({navigation}: {navigation: any}) {
           }}>
           <Image
             style={styles.calendarImage}
-            source={require('../../assets/HealthCareIcon/CalendarIcon.png')}
+            source={require('../../assets/HealthCareIcon/ClockIcon.png')}
           />
           {/* <Text style={styles.calendarText}>달력보기</Text> */}
         </TouchableOpacity>
@@ -55,22 +55,30 @@ function CalendarView({navigation}: {navigation: any}) {
       />
 
       <View style={styles.monthButtonsContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {navigation.navigate('PastMedicineList');}}
+        >
           <Text style={styles.monthButton}>복용한 약 확인</Text>
         </TouchableOpacity>
 
         {isSelectToday ? (
           todaySurveyDone ? (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {navigation.navigate('HealthSurveyResult');}}
+            >
               <Text style={styles.monthButton}>오늘의 건강 설문보기</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {navigation.navigate('HealthSurveyInput');}}
+            >
               <Text style={styles.monthButton}>오늘의 건강 설문하기</Text>
             </TouchableOpacity>
           )
         ) : (
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {navigation.navigate('HealthSurveyResult');}}
+          >
             <Text style={styles.monthButton}>지난 건강 설문 확인</Text>
           </TouchableOpacity>
         )}
@@ -95,8 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   calendarImage: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
   },
   calendarText: {
     fontSize: 15,

@@ -69,7 +69,16 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
           <Text
             style={styles.todayDate}>{`${todayMonth}월 ${todyaDate}일`}</Text>
         </View>
-        <AnalogClock />
+      </View>
+
+      <View style={styles.clockContainer}>
+        <EmptyPill navigation={navigation} />
+        <View style={styles.tmpRowContainer}>
+          <FullPill navigation={navigation} />
+          <AnalogClock />
+          <EmptyPill navigation={navigation} />
+        </View>
+        <FullPill navigation={navigation} />
       </View>
 
       <View style={styles.medicineInfoContainer}>
@@ -83,9 +92,6 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
             : `${timing}에 먹어야할 \n${mustEat}을(를) 안 드셨어요!`}
         </Text>
       </View>
-
-      <EmptyPill navigation={navigation} />
-      <FullPill navigation={navigation} />
 
       <View style={styles.healthSurveyContainer}>
         <TouchableOpacity
@@ -174,6 +180,16 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontFamily: 'SCDream6',
     color: '#000000',
+  },
+
+  clockContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tmpRowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   medicineInfoContainer: {

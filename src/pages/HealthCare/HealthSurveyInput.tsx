@@ -22,11 +22,11 @@ const HealthSurveyInput = ({navigation}: {navigation: any}) => {
   return (
     <View style={styles.container}>
       <View style={styles.settingDateContainer}>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={styles.backArrowIcon}
           onPress={() => {navigation.navigate('HealthCarePage')}} >
           <Image source={require('../../assets/icons/arrow.png')} />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         <Text style={styles.settingDateText}>
           {settingDateYear}.{settingDateMonth}.{settingDateDate}
         </Text>
@@ -141,15 +141,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF3F1',
   },
-  backArrowIcon: {
-    alignSelf: 'center',
-  },
   settingDateContainer: {
     marginTop: 45,
-    // justifyContent: "center",
+    justifyContent: "center",
     flexDirection: 'row',
   },
+  backArrowIcon: {
+    // to the left
+    position: 'absolute',
+    left: 20,
+    alignSelf: 'center',
+  },
   settingDateText: {
+    // justifyContent: "center",
     fontSize: 37,
     marginLeft: 20,
     marginRight: 13,

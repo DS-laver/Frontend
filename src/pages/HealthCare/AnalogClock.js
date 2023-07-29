@@ -14,22 +14,22 @@ export default function AnalogClock() {
 
   const getHourPosition = (length, degrees, center) => {
     const angle = (degrees - 90) * (Math.PI / 180);
-    const x = center + length * 0.45 * Math.cos(angle); // Anchor the hand at 45% of its length from the center
-    const y = center + length * 0.45 * Math.sin(angle);
+    const x = center + length * 0.5 * Math.cos(angle); // Anchor the hand at 45% of its length from the center
+    const y = center + length * 0.5 * Math.sin(angle);
     return {x, y};
   };
 
   const getMinutePosition = (length, degrees, center) => {
     const angle = (degrees - 90) * (Math.PI / 180);
-    const x = center + length * 0.45 * Math.cos(angle); // Anchor the hand at 60% of its length from the center
-    const y = center + length * 0.45 * Math.sin(angle);
+    const x = center + length * 0.52 * Math.cos(angle); // Anchor the hand at 60% of its length from the center
+    const y = center + length * 0.52 * Math.sin(angle);
     return {x, y};
   };
 
   const getSecondPosition = (length, degrees, center) => {
     const angle = (degrees - 90) * (Math.PI / 180);
-    const x = center + length * 0.44 * Math.cos(angle); // Anchor the hand at 68% of its length from the center
-    const y = center + length * 0.44 * Math.sin(angle);
+    const x = center + length * 0.43 * Math.cos(angle); // Anchor the hand at 68% of its length from the center
+    const y = center + length * 0.43 * Math.sin(angle);
     return {x, y};
   };
 
@@ -102,7 +102,7 @@ export default function AnalogClock() {
 
 const styles = StyleSheet.create({
   clockContainter: {
-    margin: 40,
+    margin: 20,
     borderWidth: 2,
     borderColor: '#000',
     position: 'relative',

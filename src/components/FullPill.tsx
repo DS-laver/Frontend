@@ -4,7 +4,9 @@ import React from 'react'
 export default function FullPill({navigation}: {navigation: any}) {
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => {navigation.navigate('PastMedicineList')}}
+        >
             <View style={styles.eatMedicineContainer}>
                 <Image
                     style={styles.pillImage}
