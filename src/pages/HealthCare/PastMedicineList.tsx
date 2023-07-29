@@ -12,6 +12,7 @@ export default function PastMedicineList({navigation}: {navigation: any}) {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.settingDateContainer}>
         <TouchableOpacity
           style={styles.backArrowIcon}
@@ -22,6 +23,29 @@ export default function PastMedicineList({navigation}: {navigation: any}) {
           {settingDateYear}.{settingDateMonth}.{settingDateDate}
         </Text>
       </View>
+
+
+      <View style={styles.timeSettingContainer}>
+        <TouchableOpacity
+          style={styles.timeSettingButton}
+          // onPress
+        >
+          <Text style={styles.timeSettingText}>아침</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.timeSettingButton}
+        >
+          <Text style={styles.timeSettingText}>점심</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.timeSettingButton}
+        >
+          <Text style={styles.timeSettingText}>저녁</Text>
+        </TouchableOpacity>
+      </View>
+
+
+
     </View>
   )
 }
@@ -52,4 +76,19 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
 
+  timeSettingContainer: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#FFF3F1',
+  },
+  timeSettingButton : {
+    padding: 20,
+    margin: 10,
+  },
+  timeSettingText: {
+    fontSize: 20,
+    fontFamily: 'SCDream6',
+    color: '#000000',
+  }
 });
