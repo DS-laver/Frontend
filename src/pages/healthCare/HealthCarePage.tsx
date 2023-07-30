@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image, Modal} from 'react-native';
 import React, {useState, useEffect} from 'react';
 
 import AnalogClock from './AnalogClock';
@@ -44,7 +44,6 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
   
   return (
     <View style={styles.container}>
-
       <View style={styles.topContainer}>
         <TouchableOpacity
           style={styles.calendarButtonContainer}
@@ -74,11 +73,11 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
       <View style={styles.clockContainer}>
         <EmptyPill navigation={navigation} />
         <View style={styles.tmpRowContainer}>
-          <FullPill navigation={navigation} />
+          <FullPill navigation={navigation} timing={timing} />
           <AnalogClock />
           <EmptyPill navigation={navigation} />
         </View>
-        <FullPill navigation={navigation} />
+        <FullPill navigation={navigation} timing={timing} />
       </View>
 
       <View style={styles.medicineInfoContainer}>

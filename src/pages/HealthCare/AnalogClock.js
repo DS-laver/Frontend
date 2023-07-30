@@ -34,7 +34,9 @@ export default function AnalogClock() {
   };
 
   const clockWidth = Dimensions.get('window').width - 180;
+  // console.log(clockWidth)
   const center = clockWidth / 2;
+  // console.log(center)
 
   const hour = time.getHours();
   const mins = time.getMinutes();
@@ -63,6 +65,8 @@ export default function AnalogClock() {
         {width: clockWidth, height: clockWidth, borderRadius: clockWidth / 2},
       ]}>
       <View style={[styles.clockFace, {borderRadius: clockWidth / 2}]}></View>
+      <View style={[
+          styles.centerFace, {left: center, top: center}]}></View>
       <View
         style={[
           styles.clockHourHandle,
@@ -114,6 +118,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '100%',
     height: '100%',
+  },
+  centerFace: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    backgroundColor: 'blue',
+    width: '5%',
+    height: '5%',
   },
   clockHourHandle: {
     position: 'absolute',
