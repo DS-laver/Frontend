@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 // https://github.com/indiespirit/react-native-chart-kit
 import {PieChart} from 'react-native-chart-kit';
+import SickData from '../../components/SickData';
 
 export default function HealthDataPage({navigation}: {navigation: any}) {
   const [humanData, setHumanData] = useState({
@@ -49,28 +50,28 @@ export default function HealthDataPage({navigation}: {navigation: any}) {
   ];
 
   const chartConfig = {
-    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFrom: '#1E2923',
     backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: "#08130D",
+    backgroundGradientTo: '#08130D',
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
-    propsForLabels : {
+    propsForLabels: {
       fontSize: 10,
       fontFamily: 'SCDream4',
       color: '#000000',
-    }
-    
+    },
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.chatBotContainer}>
         <TouchableOpacity
-          onPress={() => {navigation.navigate('ChatBotPage')}}
-        >
+          onPress={() => {
+            navigation.navigate('ChatBotPage');
+          }}>
           <Image
             style={styles.chatbotImage}
             source={require('../../assets/HealthDataIcon/ChatBotIcon.png')}
@@ -78,8 +79,9 @@ export default function HealthDataPage({navigation}: {navigation: any}) {
           <Text style={styles.chatBotText}>약 알리미</Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <ScrollView horizontal={true} pagingEnabled={true}>
+
+      <View style={styles.dataShowContainer}>
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} pagingEnabled={true}>
           <View style={styles.humanDataContainer}>
             <Image
               style={styles.humanImage}
@@ -102,6 +104,69 @@ export default function HealthDataPage({navigation}: {navigation: any}) {
           </View>
         </ScrollView>
       </View>
+
+      <ScrollView>
+        <YearAndMonth Year={2023} Month={7} Data={julData}/>
+        <YearAndMonth Year={2023} Month={6} Data={junData}/>
+      </ScrollView>
+      
+    </View>
+  );
+}
+
+const julData = [
+  {
+    idx : 1,
+    date: '2023-07-01',
+    sick: ['두통', '근육통'],
+    detail: '3일간 호소'
+  },
+]
+
+const junData = [
+  {
+    idx : 2,
+    date: '2023-06-02',
+    sick: ['요통', '근육통'],
+    detail: '무리한 집안일'
+  },
+  {
+    idx : 3,
+    date: '2023-06-07',
+    sick: ['두통'],
+    detail: '스트레스성'
+  },
+  {
+    idx : 4,
+    date: '2023-06-10',
+    sick: ['근육통'],
+    detail: '무리한 등산'
+  },
+  {
+    idx : 5,
+    date: '2023-06-18',
+    sick: ['복통'],
+    detail: '생리통'
+  },
+]
+
+function YearAndMonth({Year, Month, Data} : {Year: number, Month: number, Data: any}) {
+  return (
+    <View>
+      <View style={styles.dateContainer}>
+        <Text style={styles.dateText}>{Year}년 {Month}월</Text>
+        <View style={styles.horizontalLine} />
+      </View>
+      {Data.map((item) => {
+        return (
+          <SickData
+            index={item.idx}
+            date={item.date}
+            sick={item.sick}
+            detail={item.detail}
+          />
+        );
+      })}
     </View>
   );
 }
@@ -110,14 +175,16 @@ let screenWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#FFF3F1',
   },
 
+  dataShowContainer: {
+    height: 360,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
   chatBotContainer: {
-    // always on top left
     position: 'absolute',
     top: 0,
     right: 0,
@@ -140,7 +207,6 @@ const styles = StyleSheet.create({
 
   humanDataContainer: {
     zIndex: 0,
-    flex: 1,
     width: screenWidth,
     alignItems: 'center',
     marginTop: 40,
@@ -157,7 +223,31 @@ const styles = StyleSheet.create({
   },
 
   circleDataContainer: {
-    marginTop: 40,
+    marginTop: 50,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  dateContainer: {
+    marginLeft: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingRight: 10,
+    borderRightWidth: 2,
+    borderRightColor: 'gray',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  dateText: {
+    fontSize: 18,
+    fontFamily: 'SCDream6',
+    color: '#5F5F5F',
+  },
+  horizontalLine: {
+    flex: 1,
+    height: 2,
+    backgroundColor: '#989898',
+    marginLeft: 10,
+    marginRight: 30,
   },
 });
