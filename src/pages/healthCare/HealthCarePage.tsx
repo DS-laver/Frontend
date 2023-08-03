@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image, Modal} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 
 import AnalogClock from './AnalogClock';
@@ -13,8 +20,8 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
     today.getMonth() + 1 < 10
       ? `0${today.getMonth() + 1}`
       : today.getMonth() + 1;
-  var todyaDate = today.getDate();
-
+  var todyaDate =
+    today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
   var medicineAllEat = false;
   const [timing, setTiming] = useState('');
   const [mustEat, setMustEat] = useState(['타이레놀', '비타민C']);
@@ -41,7 +48,7 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
 
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
