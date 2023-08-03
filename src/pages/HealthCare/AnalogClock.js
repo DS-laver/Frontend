@@ -57,49 +57,57 @@ export default function AnalogClock() {
     secondsDegrees,
     center,
   );
-
+  
   return (
     <View
+    id='clockContainter'
       style={[
         styles.clockContainter,
         {width: clockWidth, height: clockWidth, borderRadius: clockWidth / 2},
-      ]}>
+      ]}
+      >
       <View style={[styles.clockFace, {borderRadius: clockWidth / 2}]}></View>
-      <View style={[
-          styles.centerFace, {left: center, top: center}]}></View>
+      
+      <View 
+      style={[
+          styles.centerFace, {left: center-8, top: center-6}]}
+      />
+          
       <View
         style={[
           styles.clockHourHandle,
           {
             width: 6,
             height: hourLength,
-            left: hourPosition.x,
-            top: hourPosition.y,
+            left: hourPosition.x-6,
+            top: hourPosition.y-21,
             transform: [{rotate: `${hourDegrees}deg`}],
           },
-        ]}></View>
+        ]}/>
+
       <View
         style={[
           styles.clockMinitesHandle,
           {
             width: 4,
             height: minsLength,
-            left: minsPosition.x,
-            top: minsPosition.y,
+            left: minsPosition.x-6,
+            top: minsPosition.y-27,
             transform: [{rotate: `${minsDegrees}deg`}],
           },
-        ]}></View>
+        ]}/>
+
       <View
         style={[
           styles.clockSecondHandle,
           {
             width: 2,
             height: secondsLength,
-            left: secondsPosition.x,
-            top: secondsPosition.y,
+            left: secondsPosition.x-2,
+            top: secondsPosition.y-30,
             transform: [{rotate: `${secondsDegrees}deg`}],
           },
-        ]}></View>
+        ]}/>
     </View>
   );
 }
@@ -123,20 +131,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 0,
-    backgroundColor: 'blue',
+    backgroundColor: '#8C7261',
     width: '5%',
     height: '5%',
+    borderRadius: 50,
   },
   clockHourHandle: {
     position: 'absolute',
-    backgroundColor: 'black',
+    backgroundColor: '#8C7261',
   },
   clockMinitesHandle: {
     position: 'absolute',
-    backgroundColor: 'green',
+    backgroundColor: '#8C7261',
   },
   clockSecondHandle: {
     position: 'absolute',
-    backgroundColor: 'red',
+    backgroundColor: '#8C7261',
   },
 });
