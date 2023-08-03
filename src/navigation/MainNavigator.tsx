@@ -4,6 +4,7 @@ import CommStack from "./CommStack";
 import HealthStack from "./HealthStack";
 import HealthDataStack from "./HealthDataStack";
 import MyStack from "./MyStack";
+import LoginStack from "./LoginStack";
 
 import {ParamListBase, RouteProp} from '@react-navigation/native'
 import {Image, Text} from 'react-native'
