@@ -9,8 +9,20 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 
-export default function JoinMediPage({navigation}: {navigation: any}) {
+const CONTAINER_STYLE = {
+  borderRadius: 20,
+  width: '100%',
+  paddingTop: 30,
+  paddingBottom: 30,
+  backgroundColor: '#FFFFFF',
+  shadowColor: '#000',
+  shadowOffset: {width: 2, height: 2},
+  shadowOpacity: 0.85,
+  shadowRadius: 3.84,
+  elevation: 7,
+}
 
+export default function AddMediPage({navigation}: {navigation: any}) {
   const [eatMediTime, setEatMediTime] = useState('00:00');
   const [everyDay, setEveryDay] = useState(false);
   const [sunDayEat, setSunDayEat] = useState(false);
@@ -49,38 +61,23 @@ export default function JoinMediPage({navigation}: {navigation: any}) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>약 관리를 도울게요 💊</Text>
-        <Text style={styles.congHighText}>
-          복용하시는 약과 시간을 알려주시면
-        </Text>
-        <Text style={styles.congHighText}>복용 시간에 알림을 드립니다.</Text>
-      </View>
-
-      <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, {backgroundColor: '#FEB2B4'}]} />
-        <View style={[styles.progressBar, {backgroundColor: '#FEB2B4'}]} />
-        <View style={[styles.progressBar, {backgroundColor: '#FEB2B4'}]} />
-        <View style={[styles.progressBar, {backgroundColor: '#FFE5EC'}]} />
-      </View>
-
       <View style={styles.addMedicineContainer}>
-        <View style={styles.mediTimeContainer}>
+      <View style={[styles.mediTimeContainer, CONTAINER_STYLE]}>
           <View style={styles.mediTitleContianer}>
             <Image
               style={styles.mediTitleIcon}
-              source={require('../../assets/LoginIcon/clock.png')}
+              source={require('../../assets/MyPageIcon/clock.png')}
             />
             <Text style={styles.mediTitleText}>몇 시에 드시는 약인가요?</Text>
           </View>
           <Text style={styles.mediTimeTime}>{eatMediTime}</Text>
         </View>
 
-        <View style={styles.mediDayContainer}>
+        <View style={[styles.mediDayContainer, CONTAINER_STYLE]}>
           <View style={styles.mediTitleContianer}>
             <Image
               style={styles.mediTitleIcon}
-              source={require('../../assets/LoginIcon/sevenDay.png')}
+              source={require('../../assets/MyPageIcon/sevenDay.png')}
             />
             <Text style={styles.mediTitleText}>요일을 선택해주세요</Text>
           </View>
@@ -156,11 +153,11 @@ export default function JoinMediPage({navigation}: {navigation: any}) {
           </View>
         </View>
 
-        <View style={styles.mediNameContainer}>
+        <View style={[styles.mediNameContainer, CONTAINER_STYLE]}>
           <View style={styles.mediTitleContianer}>
             <Image
               style={styles.mediTitleIcon}
-              source={require('../../assets/LoginIcon/medicine.png')}
+              source={require('../../assets/MyPageIcon/medicine.png')}
             />
             <Text style={styles.mediTitleText}>어떤 약을 드시나요?</Text>
           </View>
@@ -178,20 +175,15 @@ export default function JoinMediPage({navigation}: {navigation: any}) {
             <Text style={styles.mediAddBtnText}>+</Text>
           </TouchableOpacity>
         </View>
-      </View>
 
-      <View style={styles.btnsContainer}>
-        <TouchableOpacity
-          style={[styles.btnContainer, {backgroundColor: '#FFE7E8'}]}
-          onPress={() => navigation.navigate('JoinIdPage')}>
-          <Text style={styles.btnText}>이전</Text>
-        </TouchableOpacity>
+        <View style={styles.saveBtnContainer}>
+          <TouchableOpacity
+            style={styles.saveBtn}
+            onPress={() => navigation.navigate('MyPage')}>
+            <Text style={styles.saveBtnText}>추가하기</Text>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity
-          style={[styles.btnContainer, {backgroundColor: '#FEB2B4'}]}
-          onPress={() => navigation.navigate('JoinProfPage')}>
-          <Text style={styles.btnText}>다음</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -200,7 +192,7 @@ export default function JoinMediPage({navigation}: {navigation: any}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF3F1',
   },
 
   titleContainer: {
@@ -257,6 +249,7 @@ const styles = StyleSheet.create({
     margin: 20,
     alignItems: 'center',
     // justifyContent: 'center',
+    marginTop: 40,
   },
   mediTitleContianer: {
     flexDirection: 'row',
@@ -278,9 +271,6 @@ const styles = StyleSheet.create({
   mediTimeContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomColor: '#ECECEC',
-    borderBottomWidth: 1,
-    paddingBottom: 20,
   },
   mediTimeTime: {
     fontSize: 20,
@@ -289,10 +279,7 @@ const styles = StyleSheet.create({
   },
 
   mediDayContainer: {
-    marginTop: 20,
-    borderBottomColor: '#ECECEC',
-    borderBottomWidth: 1,
-    paddingBottom: 20,
+    marginTop: 40,
   },
   mediEveryDayContainer: {
     flexDirection: 'row',
@@ -320,8 +307,9 @@ const styles = StyleSheet.create({
   },
 
   mediNameContainer: {
-    marginTop: 20,
+    marginTop: 40,
     alignItems: 'center',
+    padding: 30,
   },
   mediNameBtn: {
     flexDirection: 'row',
@@ -348,5 +336,27 @@ const styles = StyleSheet.create({
   horizontalLine: {
     height: 2,
     backgroundColor: '#989898',
+  },
+
+  saveBtnContainer: {
+    marginTop: 40,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  saveBtn: {
+    padding: 10,
+    width: '70%',
+    borderRadius: 10,
+    backgroundColor: '#D9D9D9',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  saveBtnText: {
+    fontSize: 20,
+    fontFamily: 'SCDream5',
+    color: '#000000',
+    textAlign: 'center',
   },
 });

@@ -80,7 +80,7 @@ export default function AnalogClock() {
             width: 6,
             height: hourLength,
             left: hourPosition.x-6,
-            top: hourPosition.y-21,
+            top: hourPosition.y-23,
             transform: [{rotate: `${hourDegrees}deg`}],
           },
         ]}/>
@@ -103,7 +103,7 @@ export default function AnalogClock() {
           {
             width: 2,
             height: secondsLength,
-            left: secondsPosition.x-2,
+            left: secondsPosition.x-4,
             top: secondsPosition.y-30,
             transform: [{rotate: `${secondsDegrees}deg`}],
           },
@@ -131,21 +131,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 0,
-    backgroundColor: '#8C7261',
+    backgroundColor: '#8C7062',
     width: '5%',
     height: '5%',
     borderRadius: 50,
   },
   clockHourHandle: {
     position: 'absolute',
-    backgroundColor: '#8C7261',
+    backgroundColor: '#8C7062',
   },
   clockMinitesHandle: {
     position: 'absolute',
-    backgroundColor: '#8C7261',
+    backgroundColor: '#8C7062',
   },
   clockSecondHandle: {
     position: 'absolute',
-    backgroundColor: '#8C7261',
+    backgroundColor: '#8C7062',
   },
 });
