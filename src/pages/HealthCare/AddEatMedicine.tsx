@@ -12,7 +12,8 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
     today.getMonth() + 1 < 10
       ? `0${today.getMonth() + 1}`
       : today.getMonth() + 1;
-  var todyaDate = today.getDate();
+  var todyaDate =
+    today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
 
   const [medicineList, changeMedicineList] = useState([
     {
@@ -62,7 +63,7 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
         </View>
         <View style={styles.addImageContainer}>
           <TouchableOpacity 
-            // onPress={() => {}}
+            onPress={() => {navigation.navigate('Camera')}}
             style={styles.addImageIcon}
           >
             <Image

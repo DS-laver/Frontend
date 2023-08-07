@@ -9,8 +9,15 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 
-export default function FullPill({navigation, timing}: {navigation: any, timing: string}) {
+export default function FullPill({
+  navigation,
+  timing,
+}: {
+  navigation: any;
+  timing: string;
+}) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalWhiteVisible, setModalWhiteVisible] = useState(false);
 
   const [medicineList, changeMedicineList] = useState([
     {
@@ -58,6 +65,7 @@ export default function FullPill({navigation, timing}: {navigation: any, timing:
       <TouchableOpacity
         onPress={() => {
           setModalVisible(true);
+          setModalWhiteVisible(true);
         }}>
         <View style={styles.eatMedicineContainer}>
           <Image
@@ -67,7 +75,6 @@ export default function FullPill({navigation, timing}: {navigation: any, timing:
         </View>
       </TouchableOpacity>
 
-      {/* Modal to show the list of eaten medicines */}
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.EatMedicineListContainer}>
           <Text style={styles.titleText}>{timing}</Text>
@@ -80,6 +87,7 @@ export default function FullPill({navigation, timing}: {navigation: any, timing:
                 isEaten={item.eaten}
                 imageSource={item.image}
                 eatTime={item.time}
+                navigation={navigation}
               />
             )}
             numColumns={2}
@@ -100,25 +108,34 @@ function EatenMedicineInform({
   isEaten,
   imageSource,
   eatTime,
+  navigation,
 }: {
   medicineName: string;
   isEaten: boolean;
   imageSource: string;
   eatTime: string;
+  navigation: any;
 }) {
-
   return (
     <View style={styles.EatenMedicineContainer}>
       <Text style={styles.EatenMedicineTitle}>{medicineName}</Text>
 
-      {/* // image style from styles.EatenMedicineImage and source from imageSource */}
-      <Image
-        style={styles.EatenMedicineImage}
-        // source={{ uri: imageSource }}
-        source={isEaten? {uri: imageSource} : require('../assets/HealthCareIcon/AddCameraIcon.png')}
-      />
+      <TouchableOpacity
+        onPress={() => {navigation.navigate('Camera')}}
+      >
+        <Image
+          style={ styles.EatenMedicineImage  }
+          source={
+            isEaten
+              ? {uri: imageSource}
+              : require('../assets/HealthCareIcon/AddCameraIcon.png')
+          }
+        />
+      </TouchableOpacity>
 
-      <Text style={styles.EatenMedicineTime}>{isEaten ? eatTime : '아직 복용하지\n않았습니다.'}</Text>
+      <Text style={isEaten ? styles.EatenMedicineTime : styles.UneatenMedicineTime}>
+        {isEaten ? eatTime : '아직 복용하지\n않았습니다.'}
+      </Text>
     </View>
   );
 }
@@ -129,9 +146,10 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  
+
   titleText: {
     marginTop: 20,
+    marginBottom: 20,
     alignContent: 'center',
     justifyContent: 'center',
     fontSize: 35,
@@ -142,7 +160,7 @@ const styles = StyleSheet.create({
   EatMedicineListContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 100,
     backgroundColor: '#ffffff',
   },
   EatenMedicineContainer: {
@@ -173,6 +191,12 @@ const styles = StyleSheet.create({
   },
   EatenMedicineTime: {
     fontSize: 16,
+    fontFamily: 'SCDream5',
+    color: '#000000',
+    textAlign: 'center',
+  },
+  UneatenMedicineTime: {
+    fontSize: 15,
     fontFamily: 'SCDream5',
     color: '#000000',
     textAlign: 'center',
