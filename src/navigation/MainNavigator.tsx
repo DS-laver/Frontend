@@ -61,7 +61,7 @@ export default function MainNavigator() {
 
   return (
     <Tab.Navigator initialRouteName='health' screenOptions={screenOptions}>
-      <Tab.Screen name="inform" component={LoginStack} />
+      <Tab.Screen name="inform" component={InformStack} />
       <Tab.Screen name="comm" component={CommStack} />
       <Tab.Screen name="health" component={HealthStack} />
       <Tab.Screen name="healthData" component={HealthDataStack} />
