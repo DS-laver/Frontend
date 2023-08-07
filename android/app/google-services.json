@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "412038047413",
+    "project_id": "laver-1f445",
+    "storage_bucket": "laver-1f445.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412038047413:android:bfbd6ef9c40be364bc00fc",
+        "android_client_info": {
+          "package_name": "com.laver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412038047413-o15235c9abu2fdjrhsqr0c5an7e42rbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPBTSwteeQXLMNRnhOtnz6OYV5rQkmrdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412038047413-o15235c9abu2fdjrhsqr0c5an7e42rbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

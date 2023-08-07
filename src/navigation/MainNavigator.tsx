@@ -4,6 +4,7 @@ import CommStack from "./CommStack";
 import HealthStack from "./HealthStack";
 import HealthDataStack from "./HealthDataStack";
 import MyStack from "./MyStack";
+import LoginStack from "./LoginStack";
 
 import {ParamListBase, RouteProp} from '@react-navigation/native'
 import {Image, Text} from 'react-native'
@@ -60,7 +61,7 @@ export default function MainNavigator() {
 
   return (
     <Tab.Navigator initialRouteName='health' screenOptions={screenOptions}>
-      <Tab.Screen name="inform" component={InformStack} />
+      <Tab.Screen name="inform" component={LoginStack} />
       <Tab.Screen name="comm" component={CommStack} />
       <Tab.Screen name="health" component={HealthStack} />
       <Tab.Screen name="healthData" component={HealthDataStack} />
