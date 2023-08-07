@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React from 'react'
-import ChatCard from '../../components/ChatCard'
+import ChatCard from '../../components/communication/ChatCard'
 
 export default function TalkPage({navigation}: {navigation: any}) {
 
@@ -17,16 +17,15 @@ export default function TalkPage({navigation}: {navigation: any}) {
         </View>
       </View>
       <ScrollView style={styles.talkMain}>
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
+        <ChatCard navigation={navigation} />
       </ScrollView>
-      <View></View>
     </SafeAreaView>
   )
 }

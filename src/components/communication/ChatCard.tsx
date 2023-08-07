@@ -1,19 +1,21 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-export default function chatCard() {
+export default function chatCard({navigation}: {navigation: any}) {
   return (
-    <View style={styles.profileView}>
-      <Image source={require('../assets/icons/chatProfile.png')} style={styles.profile} />
+    <TouchableOpacity
+      style={styles.profileView}
+      onPress={()=> navigation.navigate('ChatingPage')}>
+      <Image source={require('../../assets/icons/chatProfile.png')} style={styles.profile} />
       <View style={styles.chating}>
-        <Text style={styles.nickname}>길음동 멋쟁이</Text>
+        <Text style={styles.nickname}>바니바니당근당근</Text>
         <Text style={styles.chatContent} numberOfLines={1} ellipsizeMode="tail">안녕하세요. 팀 laver입니다.</Text>
       </View>
       <View style={styles.chatNumView}>
         {/* 읽었는지 안 읽었는지에 따라 숫자 유무 판단 */}
         <Text style={styles.chatNum}>40</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
-import BoardCard from '../../components/BoardCard';
+import BoardCard from '../../components/communication/BoardCard';
 
 // @ts-ignore
 export default function CommunicationPage({navigation}) {
