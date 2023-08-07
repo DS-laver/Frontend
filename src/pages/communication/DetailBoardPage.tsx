@@ -1,10 +1,11 @@
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, ScrollView, TextInput, Alert } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, ScrollView, TextInput, Alert, Modal } from 'react-native'
 import React, { useState } from 'react'
-import BoardDetailCard from '../../components/BoardDetailCard';
+import CommentCard from '../../components/communication/CommentCard'
 
 export default function DetailBoardPage({navigation}: {navigation: any}) {
   
   const [comment, setComment] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,12 +22,33 @@ export default function DetailBoardPage({navigation}: {navigation: any}) {
       <View style={styles.boardTitle}>
         <Text style={styles.title}>뜨개질 방법 공유</Text>
         <View style={styles.boardProfile}>
-          <TouchableOpacity style={styles.viewProfile}>
+          <TouchableOpacity style={styles.viewProfile} onPress={() => setIsModalVisible(!isModalVisible)}>
             <Image
               source={require('../../assets/icons/writerProfile.png')}
               style={styles.writerProfile} />
             <Text style={styles.writerNickname}>user</Text>
           </TouchableOpacity>
+          {isModalVisible === true ?
+          <Modal
+          animationType={"slide"}
+          transparent={true}
+          visible={isModalVisible}>
+            <View style={styles.modalBackground}>
+              <TouchableOpacity
+              onPress={() => setIsModalVisible(!isModalVisible)}
+              style={styles.cancelBtn}>
+                <Image source={require('../../assets/icons/cancelIcon.png')} />
+              </TouchableOpacity>
+              <Image source={require('../../assets/icons/settingProfile.png')} style={styles.writerDetail} />
+              <Text style={styles.username}>예승</Text>
+              <Text style={styles.statusMessage}>파주 사는 10살 딸 엄마예요~</Text>
+              <TouchableOpacity
+              onPress={() => {navigation.navigate('TalkPage')}}
+              style={styles.sendChating}>
+                <Text>채팅 보내기</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal> : <></>}
           <Text style={styles.writerTime}>07/06 12:48</Text>
         </View>
       </View>
@@ -41,6 +63,7 @@ export default function DetailBoardPage({navigation}: {navigation: any}) {
           <TextInput
             style={styles.inputComment}
             onChangeText={(text) => {setComment(text)}}
+            multiline={true}
             placeholder="댓글을 남겨보세요."
           />
           <TouchableOpacity style={styles.sendCommentIcon} onPress={() => Alert.alert('댓글을 달았습니다.')}>
@@ -51,9 +74,9 @@ export default function DetailBoardPage({navigation}: {navigation: any}) {
         </View>
       </View>
       <ScrollView>
-        <BoardDetailCard />
-        <BoardDetailCard />
-        <BoardDetailCard />
+        <CommentCard />
+        <CommentCard />
+        <CommentCard />
       </ScrollView>
     </SafeAreaView>
   )
@@ -115,6 +138,41 @@ const styles = StyleSheet.create({
     color: 'black',
     alignSelf: 'center',
   },
+  modalBackground: {
+    flex: 1,
+    height: '80%',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  cancelBtn: {
+    alignSelf: 'flex-start',
+    margin: 20,
+  },
+  writerDetail: {
+    borderRadius: 100,
+    marginBottom: 12,
+  },
+  username: {
+    fontFamily: 'SCDream5',
+    fontSize: 24,
+    color: 'black',
+    marginBottom: 6,
+  },
+  statusMessage: {
+    fontFamily: 'SCDream4',
+    fontSize: 20,
+    color: 'black',
+    marginBottom: 16,
+  },
+  sendChating: {
+    backgroundColor: '#FEC0C1',
+    padding: 10,
+    borderRadius: 16,
+    marginBottom: 20,
+  },
   writerTime: {
     fontFamily: 'SCDream4',
     fontSize: 14,
@@ -161,9 +219,9 @@ const styles = StyleSheet.create({
     height: '80%',
     marginLeft: 10,
     marginRight: 10,
-    padding: 10,
+    padding: 12,
     fontFamily: 'SCDream4',
-    fontSize: 12,
+    fontSize: 14,
     alignSelf: 'center',
   },
   sendCommentIcon: {

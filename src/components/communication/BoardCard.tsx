@@ -11,7 +11,7 @@ export default function boardCard({navigation}: {navigation: any}) {
         <Text style={styles.postDate}>03/04 05:06</Text>
       </View>
       <View style={styles.profileView}>
-        <Image source={require('../assets/icons/profile.png')} style={styles.profilePhoto} />
+        <Image source={require('../../assets/icons/profile.png')} style={styles.profilePhoto} />
         <Text style={styles.nickname}>user</Text>
       </View>
     </TouchableOpacity>
