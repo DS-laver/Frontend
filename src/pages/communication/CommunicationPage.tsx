@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, TextInput, ScrollView, Alert, Button } from 'react-native'  // FCM
-import BoardCard from '../../components/BoardCard';
+// import BoardCard from '../components/BoardCard';
+import BoardCard from '../../components/communication/BoardCard';
 import messaging from '@react-native-firebase/messaging';  // FCM
 
 // @ts-ignore
