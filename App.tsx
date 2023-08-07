@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import MainNavigator from './src/navigation/MainNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import LoginPage from './src/pages/Login/LoginPage';
 
 // FCM
 import messaging from '@react-native-firebase/messaging';
@@ -13,6 +14,7 @@ messaging().setBackgroundMessageHandler(async (remoteMessage)=> {
 });
 
 export default function App() {
+
   const Stack = createNativeStackNavigator()
 
   // FCM
