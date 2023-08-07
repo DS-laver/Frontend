@@ -26,7 +26,7 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
   const [timing, setTiming] = useState('');
   const [mustEat, setMustEat] = useState(['타이레놀', '비타민C']);
 
-  const [todaySurveyDone, setTodaySurveyDone] = useState(true);
+  const [todaySurveyDone, setTodaySurveyDone] = useState(false);
 
   useEffect(() => {
     const currentHour = new Date().getHours();

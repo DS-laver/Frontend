@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import React, { useCallback, useState } from 'react'
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, TextInput, ScrollView, Alert, Button } from 'react-native'  // FCM
 import BoardCard from '../../components/BoardCard';
+import messaging from '@react-native-firebase/messaging';  // FCM
 
 // @ts-ignore
 export default function CommunicationPage({navigation}) {
 
   const [textInput, setTextInput] = useState('');
+
+  // FCM 
+  const getFcmToken = useCallback(async () =>{
+    const fcmToken = await messaging().getToken();
+    await Alert.alert(fcmToken);
+    console.log(fcmToken);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,8 +43,9 @@ export default function CommunicationPage({navigation}) {
             <Image source={require('../../assets/icons/magnifier.png')} />
           </TouchableOpacity>
         </View>
-          {/* 게시글이 하나도 없을 때랑 있을 때 조건 필요 */}
+          {/* 게시글이 하나도 없을 때랑 있을 때 조건 필요                                    아래의 Button은 FCM 토큰을 얻기 위함임.*/}
         <ScrollView style={styles.board}>
+          <Button title="get Token!!" onPress={getFcmToken}/>
           <BoardCard navigation={navigation} />
           <BoardCard navigation={navigation} />
           <BoardCard navigation={navigation} />
@@ -106,7 +115,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     width: '80%',
     padding: 10,
-    fontFamily: 'SCDream4',
   },
   magnifierIcon: {
     justifyContent: 'center',

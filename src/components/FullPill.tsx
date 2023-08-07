@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   EatenMedicineTime: {
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: 'SCDream5',
     color: '#000000',
     textAlign: 'center',

@@ -92,7 +92,7 @@ export default function AnalogClock() {
             width: 4,
             height: minsLength,
             left: minsPosition.x-6,
-            top: minsPosition.y-27,
+            top: minsPosition.y-29,
             transform: [{rotate: `${minsDegrees}deg`}],
           },
         ]}/>
@@ -103,8 +103,8 @@ export default function AnalogClock() {
           {
             width: 2,
             height: secondsLength,
-            left: secondsPosition.x-4,
-            top: secondsPosition.y-30,
+            left: secondsPosition.x-3,
+            top: secondsPosition.y-32,
             transform: [{rotate: `${secondsDegrees}deg`}],
           },
         ]}/>
