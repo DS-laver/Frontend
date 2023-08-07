@@ -20,6 +20,7 @@
     "react": "17.0.2",
     "react-native": "^0.68.2",
     "react-native-calendars": "^1.1300.0",
+    "react-native-camera": "^4.2.1",
     "react-native-chart-kit": "^6.12.0",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-modal": "^13.0.1",

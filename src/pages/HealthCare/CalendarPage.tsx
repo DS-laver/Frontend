@@ -34,7 +34,7 @@ function CalendarView({navigation}: {navigation: any}) {
         </TouchableOpacity>
       </View>
       <View style={styles.calendarTitleContainer}>
-        <Text style={styles.calendarTitle}>월별</Text>
+        <Text style={styles.calendarTitle}>건강 달력</Text>
       </View>
       <Calendar
         style={styles.calendar}
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   calendarTitle: {
-    marginTop: -20,
+    marginTop: 10,
     alignItems: 'center',
     fontSize: 40,
     fontFamily: 'SCDream6',

@@ -22,7 +22,9 @@ export default function HealthCarePage({navigation}: {navigation: any}) {
       : today.getMonth() + 1;
   var todyaDate =
     today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+
   var medicineAllEat = false;
+  
   const [timing, setTiming] = useState('');
   const [mustEat, setMustEat] = useState(['타이레놀', '비타민C']);
 
