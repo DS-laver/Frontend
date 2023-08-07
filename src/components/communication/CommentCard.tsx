@@ -8,7 +8,7 @@ export default function BoardDetailCard() {
         <View style={styles.commentInform}>
           <View style={styles.commentProfile}>
             <Image
-              source={require('../assets/icons/commentProfile.png')}
+              source={require('../../assets/icons/commentProfile.png')}
               style={styles.commentProfileImg} />
             <Text style={styles.commentNickname}>user</Text>
           </View>
