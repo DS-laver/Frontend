@@ -42,7 +42,8 @@ export default function Youtube({navigation}: {navigation: any}) {
         data={videos}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('YoutubeDetail', { videoId: item.id.videoId, title: item.snippet.title })}>
+            onPress={() => navigation.navigate('YoutubeDetail', { videoId: item.id.videoId, title: item.snippet.title })}
+            style={styles.videoView}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
                 source={{ uri: item.snippet.thumbnails.default.url }}
@@ -50,13 +51,6 @@ export default function Youtube({navigation}: {navigation: any}) {
               <Text>{item.snippet.title}</Text>
             </View>
           </TouchableOpacity>
-          // <View style={styles.videoView}>
-          //   <Image
-          //     source={{ uri: item.snippet.thumbnails.default.url }}
-          //     style={{ width: 120, height: 90, marginRight: 10 }}
-          //   />
-          //   <Text>{item.snippet.title}</Text>
-          // </View>
         )}
         keyExtractor={(item) => item.id.videoId}
       />
@@ -85,7 +79,7 @@ const styles = StyleSheet.create({
   },
   magnifierIcon: {
     justifyContent: 'center',
-    marginLeft: 10,
+    marginLeft: 8,
   },
   videoView: {
     flexDirection: 'row',

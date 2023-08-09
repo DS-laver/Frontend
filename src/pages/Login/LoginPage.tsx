@@ -11,7 +11,6 @@ import React, {useState} from 'react';
 export default function LoginPage({navigation}: {navigation: any}) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [login, setLogin] = useState(true)
 
   return (
     <View style={styles.container}>
@@ -59,8 +58,7 @@ export default function LoginPage({navigation}: {navigation: any}) {
 
       <View style={styles.btnsContainer}>
         <TouchableOpacity
-          style={[styles.btnContainer, {backgroundColor: '#FFE7E8'}]}
-          onPress={() => navigation.navigate('App', {YesorNo: login})}>
+          style={[styles.btnContainer, {backgroundColor: '#FFE7E8'}]}>
           <Text style={styles.btnText}>로그인하기</Text>
         </TouchableOpacity>
 
