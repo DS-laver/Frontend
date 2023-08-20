@@ -161,14 +161,12 @@ function EatenMedicineInform({
     <View style={styles.EatenMedicineContainer}>
       <Text style={styles.EatenMedicineTitle}>{medicineName}</Text>
       
-      {/* // image style from styles.EatenMedicineImage and source from imageSource */}
       <Image
         style={styles.EatenMedicineImage}
-        // source={{ uri: imageSource }}   
-        source={{ uri: imageSource }}
+        source={isEaten ? { uri: imageSource } : require('../../assets/HealthCareIcon/EmptyPill.png')}
       />
 
-      <Text style={styles.EatenMedicineTime}>{eatTime}</Text>
+      <Text style={styles.EatenMedicineTime}>{isEaten? eatTime : '미복용'}</Text>
     </View>
   );
 }
@@ -223,7 +221,8 @@ const styles = StyleSheet.create({
   EatMedicineListContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 20,
+    marginBottom: 180,
   },
   EatenMedicineContainer: {
     justifyContent: 'center',

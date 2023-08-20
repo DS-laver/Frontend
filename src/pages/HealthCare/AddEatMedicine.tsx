@@ -1,11 +1,18 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, TouchableOpacity, Image, FlatList} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
+import { launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { request, PERMISSIONS } from 'react-native-permissions';
 
-// https://velog.io/@qierapu1im/React-Native-React-Native-Vision-Camera%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-%EC%82%AC%EC%A7%84-%EB%8F%99%EC%98%81%EC%83%81-%EC%B4%AC%EC%98%81-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
-// import {Camera} from 'react-native-vision-camera';
 
 export default function AddEatMedicine({navigation}: {navigation: any}) {
-  
   var today = new Date();
   var todayYear = today.getFullYear();
   var todayMonth =
@@ -15,28 +22,61 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
   var todyaDate =
     today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
 
+  const imagePickerOptions = {
+    mediaType: 'photo',
+    maxHeight: 512,
+    maxWidth: 512,
+    includeBase64: Platform.OS === 'android',
+  };
+
+  const onPickImage = (res) => {
+    console.log("onPickImage triggered with:", res);
+    if (res.didCancel || !res.assets) {
+      return;
+    }
+    setGallery(res);
+  };
+
+  const onLaunchCamera = async () => {
+    if (Platform.OS === 'android') {
+      const permissionStatus = await request(PERMISSIONS.ANDROID.CAMERA);
+      if (permissionStatus !== 'granted') {
+        console.log('Camera permission denied');
+        return;
+      }
+    }
+    launchCamera(imagePickerOptions, onPickImage);
+  };
+
+  const onSelectImage = () => {
+    launchImageLibrary(imagePickerOptions, onPickImage);
+  };
+
+    
+  const [gallery, setGallery] = useState(null);
+  // const [camera, setCamera] = useState(null);
+
   const [medicineList, changeMedicineList] = useState([
     {
-      idx: "1",
-      name: "타이레놀",
+      idx: '1',
+      name: '타이레놀',
     },
     {
-      idx: "2",
-      name: "비타민A",
+      idx: '2',
+      name: '비타민A',
     },
     {
-      idx: "3",
-      name: "비타민B",
+      idx: '3',
+      name: '비타민B',
     },
     {
-      idx: "3",
-      name: "비타민C",
+      idx: '3',
+      name: '비타민C',
     },
-  ])
+  ]);
 
   return (
     <View style={styles.container}>
-
       <View style={styles.todayDateContainer}>
         <Text style={styles.todayDate}>
           {todayYear}.{todayMonth}.{todyaDate}
@@ -48,11 +88,9 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
           <Text style={styles.titleText}>약 이름</Text>
         </View>
         <FlatList
-          keyExtractor={(item) => item.idx}
+          keyExtractor={item => item.idx}
           data={medicineList}
-          renderItem={({item}) => (
-            <CheckEatMedicine medicineName={item.name} />
-          )}
+          renderItem={({item}) => <CheckEatMedicine medicineName={item.name} />}
           numColumns={2}
         />
       </View>
@@ -62,66 +100,75 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
           <Text style={styles.titleText}>약 사진 첨부</Text>
         </View>
         <View style={styles.addImageContainer}>
-          <TouchableOpacity 
-            onPress={() => {navigation.navigate('Camera')}}
-            style={styles.addImageIcon}
-          >
+          <TouchableOpacity
+            onPress={onLaunchCamera}
+            style={styles.addImageIcon}>
             <Image
               style={styles.addImageImage}
-              source={require('../../assets/HealthCareIcon/PhotoIcon.png')}
+              source={
+                gallery && gallery.assets[0]
+                  ? {uri: gallery?.assets[0]?.uri}
+                  : require('../../assets/HealthCareIcon/PhotoIcon.png')
+              }
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addImageIcon}>
+          <TouchableOpacity onPress={onSelectImage} style={styles.addImageIcon}>
             <Image
               style={styles.addImageImage}
-              source={require('../../assets/HealthCareIcon/GalleryIcon.png')}
+              source={
+                gallery && gallery.assets[0]
+                  ? {uri: gallery?.assets[0]?.uri}
+                  : require('../../assets/HealthCareIcon/GalleryIcon.png')
+              }
             />
           </TouchableOpacity>
         </View>
       </View>
-      
+
       <View style={styles.submitButtonContaner}>
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={() => {
-              navigation.navigate('HealthCarePage');
-            }}>
-            <Text style={styles.submitButtonText}>취소</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={() => {
-              navigation.navigate('HealthCarePage');
-            }}>
-            <Text style={styles.submitButtonText}>저장</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => {
+            navigation.navigate('HealthCarePage');
+          }}>
+          <Text style={styles.submitButtonText}>취소</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => {
+            navigation.navigate('HealthCarePage');
+          }}>
+          <Text style={styles.submitButtonText}>저장</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
-function CheckEatMedicine ({medicineName}: {medicineName: string}) {
-
+function CheckEatMedicine({medicineName}: {medicineName: string}) {
   const [medicineAllEat, setMedicineAllEat] = useState(false);
 
   return (
     <View style={styles.checkMedicineContainer}>
       <TouchableOpacity
-        onPress={() => {setMedicineAllEat(!medicineAllEat)}}
-      >
+        onPress={() => {
+          setMedicineAllEat(!medicineAllEat);
+        }}>
         {medicineAllEat ? (
-          <Image 
-          style={styles.checkBoxImage}
-          source={require('../../assets/HealthCareIcon/CheckBoxIcon.png')} />
-          ) : (
           <Image
-          style={styles.checkBoxImage}
-          source={require('../../assets/HealthCareIcon/UncheckBoxIcon.png')} />
+            style={styles.checkBoxImage}
+            source={require('../../assets/HealthCareIcon/CheckBoxIcon.png')}
+          />
+        ) : (
+          <Image
+            style={styles.checkBoxImage}
+            source={require('../../assets/HealthCareIcon/UncheckBoxIcon.png')}
+          />
         )}
       </TouchableOpacity>
       <Text style={styles.checkMedicineText}>{medicineName}</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -144,7 +191,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SCDream6',
     color: '#000000',
   },
-  
+
   titleContainer: {
     margin: 15,
     marginBottom: 25,
@@ -163,7 +210,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     textAlign: 'center',
   },
-  
+
   medicineAddContainer: {
     alignItems: 'center',
     marginBottom: 40,
@@ -212,7 +259,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
   },
-  
+
   submitButtonContaner: {
     flexDirection: 'row',
     justifyContent: 'flex-end',

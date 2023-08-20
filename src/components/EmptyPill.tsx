@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   pillImage: {
-    width: 32,
+    width: 30.5,
     height: 30,
   },
 });
