@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, Image, StyleSheet, Linking } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Image, StyleSheet, Linking } from 'react-native';
 import axios from 'axios';
+import he from 'he';
 
 export default function NaverArticle() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -15,7 +16,7 @@ export default function NaverArticle() {
         },
         params: {
           query: searchKeyword,
-          display: 20,
+          display: 30,
           start: 1,
         },
       });
@@ -45,7 +46,7 @@ export default function NaverArticle() {
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => Linking.openURL(item.link)}>
             <View style={styles.articleView}>
-              <Text style={styles.articleTitle}>{item.title}</Text>
+              <Text style={styles.articleTitle}>{he.decode(item.title)}</Text>
             </View>
           </TouchableOpacity>
         )}

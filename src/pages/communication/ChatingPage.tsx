@@ -1,7 +1,37 @@
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, TextInput, Alert } from 'react-native'
-import React from 'react'
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, TextInput, Alert, Keyboard, KeyboardAvoidingView, Platform } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
 export default function ChatingPage({navigation}: {navigation: any}) {
+  const [message, setMessage] = useState('')
+  const [inputHeight, setInputHeight] = useState(40)
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  const handleInputChange = (text) => {
+    setMessage(text);
+    setInputHeight(Math.min(100, Math.max(40, text.length * 10))); // 길이에 따라 높이 조절
+  }
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      (e) => {
+        setKeyboardHeight(e.endCoordinates.height);
+      }
+    )
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardHeight(0);
+      }
+    )
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.chatingTop}>
@@ -14,10 +44,12 @@ export default function ChatingPage({navigation}: {navigation: any}) {
           <Text style={styles.nickname}>바니바니당근당근</Text>
         </View>
       </View>
-      <ScrollView style={styles.chatingView}>
+      <ScrollView style={[styles.chatingView, { marginBottom: keyboardHeight }]} >
 
       </ScrollView>
-      <View style={styles.inputChatingView}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.inputChatingView}>
         <TextInput
           style={styles.talkInput}
           multiline={true}
@@ -27,7 +59,7 @@ export default function ChatingPage({navigation}: {navigation: any}) {
             <Text style={styles.sendText}>전송</Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

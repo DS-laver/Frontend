@@ -33,20 +33,22 @@ export default function DetailBoardPage({navigation}: {navigation: any}) {
           animationType={"slide"}
           transparent={true}
           visible={isModalVisible}>
-            <View style={styles.modalBackground}>
-              <TouchableOpacity
-              onPress={() => setIsModalVisible(!isModalVisible)}
-              style={styles.cancelBtn}>
-                <Image source={require('../../assets/icons/cancelIcon.png')} />
-              </TouchableOpacity>
-              <Image source={require('../../assets/icons/settingProfile.png')} style={styles.writerDetail} />
-              <Text style={styles.username}>예승</Text>
-              <Text style={styles.statusMessage}>파주 사는 10살 딸 엄마예요~</Text>
-              <TouchableOpacity
-              onPress={() => {navigation.navigate('TalkPage')}}
-              style={styles.sendChating}>
-                <Text>채팅 보내기</Text>
-              </TouchableOpacity>
+            <View style={styles.centeredView}>
+              <View style={styles.modalBackground}>
+                <TouchableOpacity
+                onPress={() => setIsModalVisible(!isModalVisible)}
+                style={styles.cancelBtn}>
+                  <Image source={require('../../assets/icons/cancelIcon.png')} />
+                </TouchableOpacity>
+                <Image source={require('../../assets/icons/settingProfile.png')} style={styles.writerDetail} />
+                <Text style={styles.username}>예승</Text>
+                <Text style={styles.statusMessage}>파주 사는 10살 딸 엄마예요~</Text>
+                <TouchableOpacity
+                onPress={() => {navigation.navigate('TalkPage')}}
+                style={styles.sendChating}>
+                  <Text>채팅 보내기</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </Modal> : <></>}
           <Text style={styles.writerTime}>07/06 12:48</Text>
@@ -138,14 +140,19 @@ const styles = StyleSheet.create({
     color: 'black',
     alignSelf: 'center',
   },
-  modalBackground: {
+  centeredView: {
     flex: 1,
-    height: '80%',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalBackground: {
+    backgroundColor: 'rgb(255, 255, 255)',
     alignItems: 'center',
     justifyContent: 'center',
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
+    width: '100%',
   },
   cancelBtn: {
     alignSelf: 'flex-start',

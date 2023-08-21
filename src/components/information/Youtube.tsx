@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import he from 'he';
 
 export default function Youtube({navigation}: {navigation: any}) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,7 +15,7 @@ export default function Youtube({navigation}: {navigation: any}) {
         q: searchTerm,
         part: 'snippet',
         type: 'video',
-        maxResults: 10,
+        maxResults: 30,
         key: API_KEY,
       }
     })
@@ -47,12 +48,13 @@ export default function Youtube({navigation}: {navigation: any}) {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
                 source={{ uri: item.snippet.thumbnails.default.url }}
-                style={{ width: 120, height: 90, marginRight: 10 }}/>
-              <Text>{item.snippet.title}</Text>
+                style={{ width: 120, height: 90, margin: 10 }}/>
+              <Text style={styles.videoTitle}>{he.decode(item.snippet.title)}</Text>
             </View>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id.videoId}
+        contentContainerStyle={{ paddingBottom: 40 }}
       />
     </View>
   );
@@ -82,9 +84,15 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   videoView: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: '#C3C3C3',
     borderWidth: 1,
+  },
+  videoTitle: {
+    flex: 1,
+    fontFamily: 'SCDream4',
+    color: 'black',
   },
 })

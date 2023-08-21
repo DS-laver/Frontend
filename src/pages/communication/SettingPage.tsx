@@ -1,8 +1,28 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet, Modal, TextInput, SafeAreaView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, Modal, TextInput, SafeAreaView, Platform } from 'react-native'
 import React, { useState } from 'react'
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export default function SettingPage({navigation}: {navigation: any}) {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [gallery, setGallery] = useState('')
+
+  const onSelectImage = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 512,
+        maxHeight: 512,
+        includeBase64: Platform.OS === 'ios' ? false : true,
+      },
+      res => {
+        if (res.didCancel) {
+          return;
+        }
+        const imageUri = res.assets[0].uri
+        setGallery(imageUri)
+      }
+    )
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,9 +35,11 @@ export default function SettingPage({navigation}: {navigation: any}) {
         <Text style={styles.settingText}>설정</Text>
       </View>
       <View style={styles.profileView}>
-        <Image source={require('../../assets/icons/settingProfile.png')} style={styles.bigProfile}  />
-        <TouchableOpacity>
-          {/* 갤러리 접근 */}
+        {gallery ? (
+          <Image source={{ uri: 'file://' + gallery }} style={styles.bigProfile} />) : (
+          <Image source={require('../../assets/icons/settingProfile.png')} style={styles.bigProfile} />
+        )}
+        <TouchableOpacity onPress={onSelectImage}>
           <Text style={styles.changeProfile}>프로필 사진 수정</Text>
         </TouchableOpacity>
       </View>
@@ -38,23 +60,25 @@ export default function SettingPage({navigation}: {navigation: any}) {
           animationType={"slide"}
           transparent={true}
           visible={isModalVisible}>
-          <View style={styles.messageModal}>
-            <Text style={styles.modalTitle}>상태 메시지 변경</Text>
-            <Text style={styles.subTitle}>변경 전</Text>
-            <View style={styles.beforeView}>
-              <Text style={styles.beforeMessage}>파주 사는 10살 딸 엄마예요~!</Text>
-            </View>
-            <Text style={styles.subTitle}>변경 후</Text>
-            <View style={styles.afterView}>
-              <TextInput maxLength={100} />
-            </View>
-            <View style={styles.modalBtn}>
-              <TouchableOpacity style={styles.cancelBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
-                <Text style={styles.cancelText}>취소</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.saveBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
-                <Text style={styles.saveText}>완료</Text>
-              </TouchableOpacity>
+          <View style={styles.centeredView}>
+            <View style={styles.messageModal}>
+              <Text style={styles.modalTitle}>상태 메시지 변경</Text>
+              <Text style={styles.subTitle}>변경 전</Text>
+              <View style={styles.beforeView}>
+                <Text style={styles.beforeMessage}>파주 사는 10살 딸 엄마예요~!</Text>
+              </View>
+              <Text style={styles.subTitle}>변경 후</Text>
+              <View style={styles.afterView}>
+                <TextInput maxLength={100} />
+              </View>
+              <View style={styles.modalBtn}>
+                <TouchableOpacity style={styles.cancelBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
+                  <Text style={styles.cancelText}>취소</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.saveBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
+                  <Text style={styles.saveText}>완료</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Modal> :
@@ -96,6 +120,8 @@ const styles = StyleSheet.create({
   },
   bigProfile: {
     borderRadius: 100,
+    width: 150,
+    height: 150,
   },
   changeProfile: {
     fontSize: 24,
@@ -151,6 +177,12 @@ const styles = StyleSheet.create({
     fontFamily: 'SCDream5',
     fontSize: 20,
     color: '#000000',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   messageModal: {
     backgroundColor: '#ffffff',
