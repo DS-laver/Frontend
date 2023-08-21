@@ -44,10 +44,6 @@ const HealthSurveyInput = ({navigation}: {navigation: any}) => {
           <YesOrNo question={'요통이 있었나요?'} />
           <YesOrNo question={'복통이 있었나요?'} />
           <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
-          <ExplainQuestion question={'오늘 아팠던 곳이 있나요?'} />
         </View>
 
         <View style={styles.submitButtonContaner}>

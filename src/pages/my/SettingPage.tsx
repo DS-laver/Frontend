@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, Modal, TextInput, } from 'react-native'
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -7,6 +7,8 @@ export default function SettingPage({navigation}: {navigation: any}) {
   const [nickname, setNickname] = useState('예승');
   const [intro, setIntro] = useState('파주사는 10살 딸 엄마에요~^^');
   const [pushAlert, setPushAlert] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,9 +33,41 @@ export default function SettingPage({navigation}: {navigation: any}) {
         <Text style={styles.setPropDetail}>{nickname}</Text>
       </View>
 
-      <View style={styles.setPropContainer}>
-        <Text style={styles.setPropTitle}>상태메시지</Text>
-        <Text style={styles.setPropDetail}>{intro}</Text>
+      <View style={styles.statusMessage}>
+        <View>
+          <Text style={styles.setPropTitle}>상태 메시지</Text>
+          <Text style={styles.setPropDetail}>{intro}</Text>
+        </View>
+        <TouchableOpacity style={styles.changeBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
+          <Text style={styles.changeText}>수정</Text>
+        </TouchableOpacity>
+        {isModalVisible === true ? 
+        <Modal
+          animationType={"slide"}
+          transparent={true}
+          visible={isModalVisible}>
+          <View style={styles.messageModal}>
+            <Text style={styles.modalTitle}>상태 메시지 변경</Text>
+            <Text style={styles.subTitle}>변경 전</Text>
+            <View style={styles.beforeView}>
+              <Text style={styles.beforeMessage}>파주 사는 10살 딸 엄마예요~!</Text>
+            </View>
+            <Text style={styles.subTitle}>변경 후</Text>
+            <View style={styles.afterView}>
+              <TextInput maxLength={100} />
+            </View>
+            <View style={styles.modalBtn}>
+              <TouchableOpacity style={styles.cancelBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
+                <Text style={styles.cancelText}>취소</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.saveBtn} onPress={() => setIsModalVisible(!isModalVisible)}>
+                <Text style={styles.saveText}>완료</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal> :
+        <></>
+      }
       </View>
 
       <View style={styles.setPropContainer}>
@@ -99,4 +133,95 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   setPropInfo: {},
+
+  statusMessage: {
+    backgroundColor: '#ffffff',
+    borderColor: '#C3C3C3',
+    borderWidth: 1,
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  changeBtn: {
+    backgroundColor: '#FEC0C1',
+    alignSelf: 'center',
+    borderRadius: 50,
+    padding: 6,
+  },
+  changeText: {
+    fontFamily: 'SCDream5',
+    fontSize: 20,
+    color: '#ffffff',
+  },
+  messageModal: {
+    backgroundColor: '#ffffff',
+    borderColor: '#C3C3C3',
+    borderWidth: 1,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: '80%',
+    padding: 10,
+    borderRadius: 16,
+  },
+  modalTitle: {
+    fontFamily: 'SCDream5',
+    fontSize: 32,
+    color: 'black',
+    marginBottom: 10,
+  },
+  subTitle: {
+    fontFamily: 'SCDream4',
+    fontSize: 24,
+    color: 'black',
+    marginBottom: 5,
+  },
+  beforeView: {
+    backgroundColor: '#FEC0C1',
+    borderRadius: 10,
+    padding: 5,
+    borderColor: 'black',
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+  beforeMessage: {
+    fontFamily: 'SCDream4',
+    fontSize: 18,
+    color: 'black',
+  },
+  afterView: {
+    backgroundColor: '#FEC0C1',
+    borderColor: 'black',
+    borderWidth: 1,
+    fontFamily: 'SCDream4',
+    fontSize: 18,
+    borderRadius: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    marginBottom: 12,
+  },
+  modalBtn: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  cancelBtn: {
+    backgroundColor: '#FDD9D9',
+    padding: 8,
+    borderRadius: 18,
+    marginRight: 16,
+  },
+  cancelText: {
+    fontFamily: 'SCDream5',
+    fontSize: 16,
+    color: 'black',
+  },
+  saveBtn: {
+    backgroundColor: '#FEC0C1',
+    padding: 8,
+    borderRadius: 18,
+  },
+  saveText: {
+    fontFamily: 'SCDream5',
+    fontSize: 16,
+    color: 'black',
+  },
 });
