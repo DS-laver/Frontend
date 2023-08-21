@@ -7,12 +7,13 @@ export default function YoutubeDetail({route}) {
 
   return (
     <View>
-      <Text>{title}</Text>
-      <YouTube
-        videoId={videoId} // 유튜브 비디오 ID
-        play // 자동 재생
-        style={{ alignSelf: 'stretch', height: 300 }}
-      />
+      <Text style={{fontFamily: 'SCDream5', fontSize: 20, padding: 5,}}>{title}</Text>
+      {videoId ? 
+        <YouTube
+          videoId={videoId} // 유튜브 비디오 ID
+          play // 자동 재생
+          style={{ alignSelf: 'stretch', height: 300 }} />
+        : <></>}
     </View>
   )
 }

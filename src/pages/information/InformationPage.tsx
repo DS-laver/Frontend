@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, TextInput, Image, TouchableHighlight } from 'react-native'
 import Youtube from '../../components/information/Youtube'
+import NaverArticle from '../../components/information/NaverArticle'
 
 export default function InformationPage({navigation}: {navigation: any}) {
   const [keyword, setKeyword] = useState('')
   const [nutritionBtn, setNutritionBtn] = useState('#FEC0C1')
   const [foodBtn, setFoodBtn] = useState('#FEC0C1')
   const [exerciseBtn, setExerciseBtn] = useState('#FEC0C1')
-  const [videoBtn, setVideoBtn] = useState('#FEC0C1')
+  const [videoBtn, setVideoBtn] = useState('#FF686E')
   const [articleBtn, setArticleBtn] = useState('#FEC0C1')
+  const [page, setPage] = useState('영상')
 
   const nutritionBtnPress = () => {
     setNutritionBtn('#FF686E')
@@ -34,11 +36,13 @@ export default function InformationPage({navigation}: {navigation: any}) {
   const videoBtnPress = () => {
     setVideoBtn('#FF686E')
     setArticleBtn('#FEC0C1')
+    setPage('영상')
   }
 
   const articleBtnPress = () => {
     setVideoBtn('#FEC0C1')
     setArticleBtn('#FF686E')
+    setPage('기사')
   }
 
   return (
@@ -72,7 +76,10 @@ export default function InformationPage({navigation}: {navigation: any}) {
           </TouchableOpacity> */}
         {/* </View> */}
       </View>
-      <View><Youtube navigation={navigation} /></View>
+      {/* <View><Youtube navigation={navigation} /></View> */}
+      <View>
+        {page === '영상' ? <Youtube navigation={navigation} /> : <NaverArticle />}
+      </View>
     </SafeAreaView>
   )
 }
