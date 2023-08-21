@@ -29,12 +29,21 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
     includeBase64: Platform.OS === 'android',
   };
 
-  const onPickImage = (res) => {
-    console.log("onPickImage triggered with:", res);
+  const [gallery, setGallery] = useState(null);
+  const [camera, setCamera] = useState(null);
+
+  const onPickGallery= (res) => {
     if (res.didCancel || !res.assets) {
       return;
     }
     setGallery(res);
+  };
+
+  const onPickCamera = (res) => {
+    if (res.didCancel || !res.assets) {
+      return;
+    }
+    setCamera(res);
   };
 
   const onLaunchCamera = async () => {
@@ -45,17 +54,14 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
         return;
       }
     }
-    launchCamera(imagePickerOptions, onPickImage);
+    launchCamera(imagePickerOptions, onPickCamera);
   };
 
   const onSelectImage = () => {
-    launchImageLibrary(imagePickerOptions, onPickImage);
+    launchImageLibrary(imagePickerOptions, onPickGallery);
   };
 
     
-  const [gallery, setGallery] = useState(null);
-  // const [camera, setCamera] = useState(null);
-
   const [medicineList, changeMedicineList] = useState([
     {
       idx: '1',
@@ -106,8 +112,8 @@ export default function AddEatMedicine({navigation}: {navigation: any}) {
             <Image
               style={styles.addImageImage}
               source={
-                gallery && gallery.assets[0]
-                  ? {uri: gallery?.assets[0]?.uri}
+                camera && camera.assets[0]
+                  ? {uri: camera?.assets[0]?.uri}
                   : require('../../assets/HealthCareIcon/PhotoIcon.png')
               }
             />

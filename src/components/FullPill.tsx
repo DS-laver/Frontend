@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   FlatList,
   Modal,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
+import { launchCamera } from 'react-native-image-picker';
+import { request, PERMISSIONS } from 'react-native-permissions';
 
 export default function FullPill({
   navigation,
@@ -59,7 +62,7 @@ export default function FullPill({
       time: '',
     },
   ]);
-
+  
   return (
     <View>
       <TouchableOpacity
@@ -87,7 +90,6 @@ export default function FullPill({
                 isEaten={item.eaten}
                 imageSource={item.image}
                 eatTime={item.time}
-                navigation={navigation}
               />
             )}
             numColumns={2}
@@ -108,25 +110,47 @@ function EatenMedicineInform({
   isEaten,
   imageSource,
   eatTime,
-  navigation,
 }: {
   medicineName: string;
   isEaten: boolean;
   imageSource: string;
   eatTime: string;
-  navigation: any;
 }) {
+  const [gallery, setGallery] = useState(null);
+
+  const onLaunchCamera = async () => {
+    if (Platform.OS === 'android') {
+      const permissionStatus = await request(PERMISSIONS.ANDROID.CAMERA);
+      if (permissionStatus !== 'granted') {
+        console.log('Camera permission denied');
+        return;
+      }
+    }
+    launchCamera(
+      {mediaType: 'photo',
+      maxHeight: 512,
+      maxWidth: 512,
+      includeBase64: Platform.OS === 'android'}, onPickImage);
+  };
+
+  const onPickImage = (res) => {
+    if (res.didCancel || !res.assets) {
+      return;
+    }
+    setGallery(res);
+  };
+
   return (
     <View style={styles.EatenMedicineContainer}>
       <Text style={styles.EatenMedicineTitle}>{medicineName}</Text>
 
       <TouchableOpacity
-        onPress={() => {navigation.navigate('Camera')}}
+        onPress={onLaunchCamera}
       >
         <Image
           style={ styles.EatenMedicineImage  }
           source={
-            isEaten
+            isEaten || (gallery && gallery.assets[0])
               ? {uri: imageSource}
               : require('../assets/HealthCareIcon/AddCameraIcon.png')
           }
