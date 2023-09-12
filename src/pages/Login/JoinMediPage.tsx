@@ -8,6 +8,7 @@ import {
   Switch,
 } from 'react-native';
 import React, {useState} from 'react';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export default function JoinMediPage({navigation}: {navigation: any}) {
 
@@ -20,7 +21,22 @@ export default function JoinMediPage({navigation}: {navigation: any}) {
   const [thuDayEat, setThuDayEat] = useState(false);
   const [friDayEat, setFriDayEat] = useState(false);
   const [satDayEat, setSatDayEat] = useState(false);
-  const [eatMediName, setEatMediName] = useState('타이레놀');
+  const [eatMediName, setEatMediName] = useState('');
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = date => {
+    console.warn('A date has been picked: ', date);
+    hideDatePicker();
+  };
 
   const toggleSwitch = () => {
     setEveryDay(everyDay => !everyDay);
@@ -73,7 +89,19 @@ export default function JoinMediPage({navigation}: {navigation: any}) {
             />
             <Text style={styles.mediTitleText}>몇 시에 드시는 약인가요?</Text>
           </View>
-          <Text style={styles.mediTimeTime}>{eatMediTime}</Text>
+          <View>
+            <TouchableOpacity
+              style={styles.timeSelectContainer}
+              onPress={showDatePicker}>
+              <Text style={styles.timeSelectBtn}>시간 선택</Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="time"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
+          </View>
         </View>
 
         <View style={styles.mediDayContainer}>
@@ -231,6 +259,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
     marginBottom: 20,
+  },
+
+  timeSelectContainer: {
+    marginTop: 5,
+    marginBottom: -10,
+  },
+  timeSelectBtn: {
+    fontSize: 15,
+    fontFamily: 'SCDream5',
+    color: '#000000',
+    backgroundColor: '#FEB2B4',
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    borderRadius: 10,
   },
 
   btnsContainer: {

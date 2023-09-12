@@ -7,10 +7,32 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
+import axios from 'axios';
 
 export default function LoginPage({navigation}: {navigation: any}) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const apiUrl = 'http://localhost:3333/api/user/login'; 
+
+      const requestData = {
+        loginId: id,
+        password: password,
+      };
+
+      const response = await axios.post(apiUrl, requestData);
+
+      if (response.status === 200) {
+        navigation.navigate('HomeScreen');
+      } else {
+        console.error('로그인 실패:', response.data);
+      }
+    } catch (error) {
+      console.error('API 요청 에러:', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -58,6 +80,7 @@ export default function LoginPage({navigation}: {navigation: any}) {
 
       <View style={styles.btnsContainer}>
         <TouchableOpacity
+          onPress={handleLogin}
           style={[styles.btnContainer, {backgroundColor: '#FFE7E8'}]}>
           <Text style={styles.btnText}>로그인하기</Text>
         </TouchableOpacity>

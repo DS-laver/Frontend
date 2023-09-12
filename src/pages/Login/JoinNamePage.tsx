@@ -5,12 +5,48 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { useDispatch } from 'react-redux';
+import { updateName , updateNameBirth } from '../../reducers/userReducer';
 
 export default function JoinNamePage({navigation}: {navigation: any}) {
-  const [id, setId] = useState('');
+  const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
+  const dispatch = useDispatch();
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date: any) => {
+    setBirth(date);
+  };
+  
+  const handleInfoSubmit = async () => {
+    console.log("Inside handleInfoSubmit");
+    console.log("Name:", name);
+    console.log("Birth:", birth);
+    const userData = {
+      name: name,
+      birth: birth,
+    };
+    // console.log(name)
+    // console.log(birth)
+    // dispatch(updateName(name));
+    // dispatch(updateNameBirth(name, birth));
+
+    navigation.navigate('JoinIdPage');
+  };
+
 
   return (
     <View style={styles.container}>
@@ -36,28 +72,35 @@ export default function JoinNamePage({navigation}: {navigation: any}) {
         />
         <TextInput
           style={styles.inputStyle}
-          placeholder={'아이디'}
-          onChangeText={id => setId(id)}
+          placeholder={'이름'}
           autoCapitalize="none"
           returnKeyType="next"
           blurOnSubmit={false}
+          onChangeText={(text) => {setName(text)
+          console.log("Name:", name)}}
         />
+      
       </View>
 
-      <View style={styles.inputContainer}>
+      <TouchableOpacity 
+        style={[styles.inputContainer, styles.birthSetContainer]}
+        onPress={showDatePicker}
+      >
         <Image
           style={styles.inputImage}
           source={require('../../assets/LoginIcon/calendar.png')}
         />
-        <TextInput
-          placeholder={'생년월일'}
-          onChangeText={birth => setBirth(birth)}
-          autoCapitalize="none"
-          blurOnSubmit={false}
-          style={styles.inputStyle}
-          secureTextEntry={true}
+        <Text style={[styles.inputStyle, styles.birthText]}>
+          {birth === '' ? '생년월일' : birth.toISOString().split('T')[0]}
+        </Text>
+
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
         />
-      </View>
+      </TouchableOpacity>
 
       <View style={styles.btnsContainer}>
         <TouchableOpacity
@@ -67,8 +110,8 @@ export default function JoinNamePage({navigation}: {navigation: any}) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.btnContainer, {backgroundColor: '#FEB2B4'}]}
-          onPress={() => navigation.navigate('JoinIdPage')}>
+        style={[styles.btnContainer, { backgroundColor: '#FEB2B4' }]}
+        onPress={handleInfoSubmit}>
           <Text style={styles.btnText}>다음</Text>
         </TouchableOpacity>
       </View>
@@ -121,6 +164,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  birthSetContainer: {
+    padding: 20, 
+    paddingLeft: 5,
+  },
   inputImage: {
     width: 25,
     height: 25,
@@ -131,6 +178,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'SCDream5',
     color: '#989797',
+  },
+  birthText: {
+    paddingLeft: 8,
   },
 
   btnsContainer: {

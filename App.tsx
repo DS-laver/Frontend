@@ -3,6 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import MainNavigator from './src/navigation/MainNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import LoginPage from './src/pages/Login/LoginPage';
+import { Provider } from 'react-redux';
+import store from './src/store'; 
 
 // FCM
 import messaging from '@react-native-firebase/messaging';
@@ -33,8 +35,10 @@ export default function App() {
 
   
   return (
-    <NavigationContainer>
-      <MainNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <MainNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }

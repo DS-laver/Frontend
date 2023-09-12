@@ -6,29 +6,40 @@ import {
   TextInput,
   Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateIdPassword, selectName } from '../../reducers/userReducer'; // Import the necessary action and selector
 
-export default function JoinIdPage({navigation}: {navigation: any}) {
-  const [userName, setUserName] = useState('홍가윤');
+export default function JoinIdPage({ navigation }: { navigation: any }) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
 
+  const dispatch = useDispatch();
+  const userName = useSelector(selectName);
+
+  const handleInfoSubmit = async () => {
+    dispatch(updateIdPassword(id, password));
+
+    navigation.navigate('JoinMediPage');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{userName}님 반갑습니다 🙆‍♀️</Text>
-        <Text style={styles.congHighText}>갱메이트에 로그인할 때 사용할</Text>
-        <Text style={styles.congHighText}>
-          아이디와 비밀번호를 입력해주세요
+        <Text style={styles.titleText}>
+          {userName ? `${userName}님 반갑습니다 🙆‍♀️` : '반갑습니다 🙆‍♀️'}
         </Text>
+        <Text style={styles.congHighText}>갱메이트에 로그인할 때 사용할</Text>
+        <Text style={styles.congHighText}>아이디와 비밀번호를 입력해주세요</Text>
       </View>
 
       <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, {backgroundColor: '#FEB2B4'}]} />
-        <View style={[styles.progressBar, {backgroundColor: '#FEB2B4'}]} />
-        <View style={[styles.progressBar, {backgroundColor: '#FFE5EC'}]} />
-        <View style={[styles.progressBar, {backgroundColor: '#FFE5EC'}]} />
+        <View style={[styles.progressBar, { backgroundColor: '#FEB2B4' }]} />
+        <View style={[styles.progressBar, { backgroundColor: '#FEB2B4' }]} />
+        <View style={[styles.progressBar, { backgroundColor: '#FFE5EC' }]} />
+        <View style={[styles.progressBar, { backgroundColor: '#FFE5EC' }]} />
       </View>
 
       <View style={styles.inputContainer}>
@@ -39,7 +50,7 @@ export default function JoinIdPage({navigation}: {navigation: any}) {
         <TextInput
           style={styles.inputStyle}
           placeholder={'아이디'}
-          onChangeText={id => setId(id)}
+          onChangeText={(text) => setId(text)}
           autoCapitalize="none"
           returnKeyType="next"
           blurOnSubmit={false}
@@ -53,7 +64,7 @@ export default function JoinIdPage({navigation}: {navigation: any}) {
         />
         <TextInput
           placeholder={'비밀번호'}
-          onChangeText={password => setPassword(password)}
+          onChangeText={(text) => setPassword(text)}
           autoCapitalize="none"
           blurOnSubmit={false}
           style={styles.inputStyle}
@@ -68,7 +79,7 @@ export default function JoinIdPage({navigation}: {navigation: any}) {
         />
         <TextInput
           placeholder={'비밀번호 확인'}
-          onChangeText={passwordCheck => setPasswordCheck(passwordCheck)}
+          onChangeText={(text) => setPasswordCheck(text)}
           autoCapitalize="none"
           blurOnSubmit={false}
           style={styles.inputStyle}
@@ -78,20 +89,21 @@ export default function JoinIdPage({navigation}: {navigation: any}) {
 
       <View style={styles.btnsContainer}>
         <TouchableOpacity
-          style={[styles.btnContainer, {backgroundColor: '#FFE7E8'}]}
+          style={[styles.btnContainer, { backgroundColor: '#FFE7E8' }]}
           onPress={() => navigation.navigate('JoinNamePage')}>
           <Text style={styles.btnText}>이전</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.btnContainer, {backgroundColor: '#FEB2B4'}]}
-          onPress={() => navigation.navigate('JoinMediPage')}>
+          style={[styles.btnContainer, { backgroundColor: '#FEB2B4' }]}
+          onPress={handleInfoSubmit}>
           <Text style={styles.btnText}>다음</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
